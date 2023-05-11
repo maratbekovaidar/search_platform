@@ -1,0 +1,39 @@
+{
+    "language": "Kazakh",
+    "language_code": "kz",
+    "@language": {
+        "description": "Default language"
+    },
+    "app_name": "ДипломТабу",
+    "login_failure": "Қате электрондық пошта немесе құпия сөз енгізілді",
+    "enter_email": "Электрондық поштаны енгізіңіз",
+    "enter_correct_email": "Жарамды электрондық поштаны енгізіңіз",
+    "password": "Құпия сөз",
+    "enter_password": "Құпия сөзді еңгізіңіз",
+    "login": "Кіру",
+    "registration": "Тіркелу",
+    "restore_password": "Құпия сөзді қалпына келтіру",
+
+    "choose_gallery": "Галереядан таңдау",
+    "take_photo": "Фотоға түсіру",
+    "delete_avatar": "Аватарды жою",
+    "cancel": "Болдырмау",
+    "name": "Аты",
+    "surname": "Тегі",
+    "birth_day": "Туған жылы",
+
+    "cash": "Әмиян",
+    "shop": "Дүкен",
+    "message": "Хабарламалар",
+    "profile": "Профиль",
+
+    "settings": "Параметрлер",
+    "personal_data": "Жеке мәліметтер",
+    "invite_friend": "Досты шақыру",
+    "activate_promo": "Промокодты іске қосу",
+    "general": "Жалпы",
+    "privacy_policy": "Құпиялылық саясаты",
+    "terms_of_use": "Қолдану ережелері",
+    "write_to_support": "Қолдау көрсетуге жазу"
+
+}

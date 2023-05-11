@@ -1,0 +1,39 @@
+{
+    "language": "English",
+    "language_code": "en",
+    "@language": {
+        "description": "Default language"
+    },
+    "app_name": "DiplomaSearch",
+    "login_failure": "Wrong e-mail or password entered",
+    "enter_email": "Enter E-Mail",
+    "enter_correct_email": "Please enter a valid E-Mail",
+    "password": "Password",
+    "enter_password": "Enter password",
+    "login": "Login",
+    "registration": "Registration",
+    "restore_password": "Restore password",
+
+    "choose_gallery": "Select from gallery",
+    "take_photo": "Take a photo",
+    "delete_avatar": "Remove avatar",
+    "cancel": "Cancel",
+    "name": "Name",
+    "surname": "Surname",
+    "birth_day": "Birth day",
+
+    "cash": "Cash",
+    "shop": "Shop",
+    "message": "Message",
+    "profile": "Profile",
+
+    "settings": "Settings",
+    "personal_data": "Personal data",
+    "invite_friend": "Invite friend",
+    "activate_promo": "Activate promo",
+    "general": "General",
+    "privacy_policy": "Privacy policy",
+    "terms_of_use": "Terms of use",
+    "write_to_support": "Write to support"
+
+}

@@ -1,0 +1,39 @@
+{
+    "language": "Russian",
+    "language_code": "ru",
+    "@language": {
+        "description": "Default language"
+    },
+    "app_name": "ПоискДиплом",
+    "login_failure": "Неверно введён E-Mail или пароль",
+    "enter_email": "Введите E-Mail",
+    "enter_correct_email": "Введите корректный E-Mail",
+    "password": "Пароль",
+    "enter_password": "Введите пароль",
+    "login": "Войти",
+    "registration": "Зарегистрироваться",
+    "restore_password": "Восстановить пароль",
+
+    "choose_gallery": "Выбрать из галереи",
+    "take_photo": "Сделать снимок",
+    "delete_avatar": "Удалить аватар",
+    "cancel": "Отмена",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "birth_day": "Дата рождение",
+
+    "cash": "Кошелёк",
+    "shop": "Магазин",
+    "message": "Сообщения",
+    "profile": "Профиль",
+
+    "settings": "Настройки",
+    "personal_data": "Персональные данные",
+    "invite_friend": "Пригласить друга",
+    "activate_promo": "Активировать промокод",
+    "general": "Общее",
+    "privacy_policy": "Политика конфиденциальности",
+    "terms_of_use": "Пользовательское соглашение",
+    "write_to_support": "Написать в поддержку"
+
+}

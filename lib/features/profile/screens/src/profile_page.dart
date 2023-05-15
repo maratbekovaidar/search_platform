@@ -4,7 +4,6 @@ import 'package:dsplatform/features/profile/bloc/src/user/user_bloc.dart';
 import 'package:dsplatform/features/profile/domain/repositories/friend_repository.dart';
 import 'package:dsplatform/features/profile/domain/repositories/user_repository.dart';
 import 'package:dsplatform/features/profile/screens/src/friend_page.dart';
-import 'package:dsplatform/features/statistic/screens/src/statistic_page.dart';
 import 'package:dsplatform/gen/assets.gen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -281,7 +280,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     Flexible(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const StatisticPage()));
                         },
                         child: Container(
                           padding: const EdgeInsets.all(16),

@@ -2,7 +2,6 @@ import 'package:dsplatform/features/profile/domain/models/user/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dsplatform/configurations/configurations.dart';
-import 'package:dsplatform/features/statistic/screens/src/statistic_page.dart';
 import 'package:dsplatform/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -200,7 +199,6 @@ class _FriendPageState extends State<FriendPage> {
                 Flexible(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const StatisticPage()));
                     },
                     child: Container(
                       padding: const EdgeInsets.all(16),

@@ -1,10 +1,7 @@
 import 'package:dsplatform/configurations/configurations.dart';
 import 'package:dsplatform/constants/secure_storage_keys/secure_storage_keys.dart';
 import 'package:dsplatform/features/authorization/screens/src/pin_code_page.dart';
-import 'package:dsplatform/features/cash/cash.dart';
-import 'package:dsplatform/features/message/message.dart';
 import 'package:dsplatform/features/profile/profile.dart';
-import 'package:dsplatform/features/shop/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -88,9 +85,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
-    const CashPage(),
-    const ShopPage(),
-    const MessagePage(),
     const ProfilePage()
   ];
 

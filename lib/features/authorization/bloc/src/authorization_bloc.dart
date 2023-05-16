@@ -40,14 +40,12 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
     on<AuthorizationRegistrationButtonPressedEvent>((event, emit) async {
       emit(AuthorizationLoadingState());
       try {
-        String? token = await authorizationRepository.registration(event.username, event.password);
-        if (token != null) {
-
-          emit(AuthorizationSuccessState(token: token));
-          GetIt.I.get<AuthenticationBloc>().add(LoggedIn(token: token));
-          return emit(AuthorizationInitialState());
+        bool registrationResult = await authorizationRepository.registration(event.username, event.password);
+        if (registrationResult) {
+          // emit(AuthorizationSuccessState(token: token));
+          // GetIt.I.get<AuthenticationBloc>().add(LoggedIn(token: token));
+          return emit(AuthorizationRegistrationSuccessState());
         } else {
-          // GetIt.I.get<FlavorConfiguration>().changeApiEndpoint();
           return emit(AuthorizationFailureState(exception: AuthorizationFailureException("Registration failed")));
         }
       } on Exception catch (e, _) {

@@ -33,3 +33,5 @@ class AuthorizationUserInvitedState extends AuthorizationState {
   final bool result;
   AuthorizationUserInvitedState({required this.result});
 }
+
+class AuthorizationRegistrationSuccessState extends AuthorizationState {}

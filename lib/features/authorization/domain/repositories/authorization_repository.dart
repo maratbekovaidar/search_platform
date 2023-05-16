@@ -4,7 +4,7 @@ abstract class AuthorizationRepository {
 
   Future<String?> login(String email, String password);
 
-  Future<String?> registration(String email, String password);
+  Future<bool> registration(String email, String password);
 
   Future<bool> isUserInvited(String email);
 
@@ -20,7 +20,7 @@ class IAuthorizationRepository extends AuthorizationRepository {
   }
 
   @override
-  Future<String?> registration(String email, String password) {
+  Future<bool> registration(String email, String password) {
     return _authorizationService.register(email, password);
   }
 

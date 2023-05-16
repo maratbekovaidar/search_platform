@@ -69,23 +69,25 @@ class AuthorizationService {
   }
 
   /// Registration
-  Future<String?> register(String email, String password) async {
-    Response response;
-    response = await _dio.post(
-      '/users/register',
-      data: {
-        'email': email,
-        'password': password,
-        'confirmPassword': password,
-        "agreement": true
-      },
-    );
-    print(response.statusCode);
-    print(response.data);
-    if(response.statusCode == 200) {
-      return await login(email, password);
-    } else {
-      return null;
+  Future<bool> register(String email, String password) async {
+    try {
+      Response response;
+      response = await _dio.post(
+        '/users/register',
+        data: {
+          'email': email,
+          'password': password,
+          'confirmPassword': password,
+          "agreement": true
+        },
+      );
+      if(response.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
+    } on Exception catch (e, _) {
+      rethrow;
     }
   }
 

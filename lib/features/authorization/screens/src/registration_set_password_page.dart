@@ -1,6 +1,7 @@
 import 'package:dsplatform/components/notification_widget/notification_widget.dart';
 import 'package:dsplatform/configurations/configurations.dart';
 import 'package:dsplatform/features/authorization/bloc/src/authorization_bloc.dart';
+import 'package:dsplatform/features/authorization/screens/src/registration_success_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +53,10 @@ class _RegistrationSetPasswordPageState extends State<RegistrationSetPasswordPag
             "Не получилось, повторите позже...",
             NotificationWidgetType.error,
           );
+        }
+
+        if(state is AuthorizationRegistrationSuccessState) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const RegistrationSuccessPage()));
         }
       },
       child: Scaffold(

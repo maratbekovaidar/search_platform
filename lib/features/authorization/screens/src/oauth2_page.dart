@@ -25,8 +25,9 @@ class _OAuth2PageState extends State<OAuth2Page> {
       ..setBackgroundColor(const Color(0x00000000));
     _authenticator = Authenticator(webViewController: _webViewController);
     _authenticator.createClient().then((value) {
-      log(value.credentials.accessToken, name: "Access token");
-      log(value.credentials.refreshToken.toString(), name: "Refresh token");
+      log(value);
+      // log(value.credentials.accessToken, name: "Access token");
+      // log(value.credentials.refreshToken.toString(), name: "Refresh token");
       Navigator.pop(context);
     });
   }

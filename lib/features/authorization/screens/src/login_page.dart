@@ -1,11 +1,15 @@
 import 'package:dsplatform/components/notification_widget/notification_widget.dart';
 import 'package:dsplatform/configurations/configurations.dart';
+import 'package:dsplatform/constants/api/api_path.dart';
 import 'package:dsplatform/features/authorization/bloc/bloc.dart';
+import 'package:dsplatform/features/authorization/provider/authenticator.dart';
 import 'package:dsplatform/features/authorization/screens/src/oauth2_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
+import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController _passwordController;
 
   bool recovery = false;
+
+
 
   @override
   void initState() {
@@ -187,6 +193,44 @@ class _LoginPageState extends State<LoginPage> {
                       )
                     ],
                   ),
+                  const SizedBox(height: 16),
+
+                  /// Logout
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              http.post(Uri.parse("${ApiPath.apiPath}/logout"));
+                              Authenticator(webViewController: WebViewController()).clearCache();
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => const OAuth2Page()));
+                            },
+                            child: const Text(
+                              "Logout"
+                                // AppLocalizations.of(context)!.log
+                            ),
+                          )
+                      )
+                    ],
+                  ),
+
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Authenticator(webViewController: WebViewController()).showCode();
+                            },
+                            child: const Text(
+                                "Code"
+                              // AppLocalizations.of(context)!.log
+                            ),
+                          )
+                      )
+                    ],
+                  ),
+
 
                   /// Sign up
                   recovery ?         /// Password Recovery

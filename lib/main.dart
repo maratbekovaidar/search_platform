@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
               /// Authentication uninitialized state
               if(state is AuthenticationUninitializedState) {
                 return MaterialApp(
-                  title: 'Alga App',
+                  title: 'DSPlatform',
                   theme: AppTheme.basic,
                   debugShowCheckedModeBanner: false,
                   locale: locale,
@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
 
               if(state is AuthenticationLoadingState) {
                 return MaterialApp(
-                  title: 'Alga App',
+                  title: 'DSPlatform',
                   theme: AppTheme.basic,
                   debugShowCheckedModeBanner: false,
                   locale: locale,
@@ -111,7 +111,7 @@ class _MyAppState extends State<MyApp> {
               if(state is AuthenticationAuthenticatedState) {
                 if(state.isUserFillProfile) {
                   return MaterialApp.router(
-                    title: 'Alga App',
+                    title: 'DSPlatform',
                     theme: AppTheme.basic,
                     debugShowCheckedModeBanner: false,
                     locale: locale,
@@ -126,7 +126,7 @@ class _MyAppState extends State<MyApp> {
                   );
                 } else {
                   return MaterialApp(
-                    title: 'Alga App',
+                    title: 'DSPlatform',
                     theme: AppTheme.basic,
                     debugShowCheckedModeBanner: false,
                     locale: locale,
@@ -144,7 +144,7 @@ class _MyAppState extends State<MyApp> {
 
               if(state is AuthenticationUnauthenticatedState) {
                 return MaterialApp.router(
-                  title: 'Alga App',
+                  title: 'DSPlatform',
                   theme: AppTheme.basic,
                   debugShowCheckedModeBanner: false,
                   localizationsDelegates: const [
@@ -162,7 +162,7 @@ class _MyAppState extends State<MyApp> {
               }
 
               return MaterialApp(
-                title: 'Alga App',
+                title: 'DSPlatform',
                 theme: AppTheme.basic,
                 debugShowCheckedModeBanner: false,
                 locale: const Locale("ru"),

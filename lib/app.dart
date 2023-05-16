@@ -57,7 +57,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       key: navigatorKey,
-      title: 'Alga App',
+      title: 'DSPlatform',
       theme: AppTheme.basic,
       debugShowCheckedModeBanner: false,
       locale: const Locale("ru"),

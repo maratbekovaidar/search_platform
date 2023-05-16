@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "kz.maratbekovaidar" "\0"
-            VALUE "FileDescription", "dsplatform" "\0"
+            VALUE "FileDescription", "DSPlatform" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "dsplatform" "\0"
+            VALUE "InternalName", "DSPlatform" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 kz.maratbekovaidar. All rights reserved." "\0"
             VALUE "OriginalFilename", "dsplatform.exe" "\0"
-            VALUE "ProductName", "dsplatform" "\0"
+            VALUE "ProductName", "DSPlatform" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

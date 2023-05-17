@@ -41,10 +41,12 @@ class Authenticator {
     if (credentialsJson != null) {
       /// If credentials exits
       var credentials = oauth2.Credentials.fromJson(credentialsJson);
-      /// Initialize client from credentials
-      _client = oauth2.Client(credentials, identifier: identifier, secret: secret);
-      _client = await _client!.refreshCredentials().whenComplete(() => log("Token refreshed"));
-      return _client!;
+      if(credentials.tokenEndpoint.toString().startsWith(ApiPath.apiPath)) {
+        /// Initialize client from credentials
+        _client = oauth2.Client(credentials, identifier: identifier, secret: secret);
+        _client = await _client!.refreshCredentials().whenComplete(() => log("Token refreshed"));
+        return _client!;
+      }
     }
 
     /// If credentials from secure storage doesn't exist
@@ -90,7 +92,7 @@ class Authenticator {
     webViewController.setNavigationDelegate(
       NavigationDelegate(
         onUrlChange: (urlChange) {
-          if(urlChange.url!.startsWith(redirectUrl.toString())) {
+          if(urlChange.url != null && urlChange.url!.startsWith(redirectUrl.toString())) {
             log(urlChange.url.toString());
             c.complete(Uri.parse(urlChange.url!));
           }

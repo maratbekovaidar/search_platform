@@ -20,8 +20,6 @@ ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProfileModel {
-  String get id => throw _privateConstructorUsedError;
-  String get user => throw _privateConstructorUsedError;
   String get iin => throw _privateConstructorUsedError;
   OrganizationModel get organization => throw _privateConstructorUsedError;
 
@@ -37,8 +35,7 @@ abstract class $ProfileModelCopyWith<$Res> {
           ProfileModel value, $Res Function(ProfileModel) then) =
       _$ProfileModelCopyWithImpl<$Res, ProfileModel>;
   @useResult
-  $Res call(
-      {String id, String user, String iin, OrganizationModel organization});
+  $Res call({String iin, OrganizationModel organization});
 
   $OrganizationModelCopyWith<$Res> get organization;
 }
@@ -56,20 +53,10 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? user = null,
     Object? iin = null,
     Object? organization = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as String,
       iin: null == iin
           ? _value.iin
           : iin // ignore: cast_nullable_to_non_nullable
@@ -98,8 +85,7 @@ abstract class _$$_ProfileModelCopyWith<$Res>
       __$$_ProfileModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id, String user, String iin, OrganizationModel organization});
+  $Res call({String iin, OrganizationModel organization});
 
   @override
   $OrganizationModelCopyWith<$Res> get organization;
@@ -116,20 +102,10 @@ class __$$_ProfileModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? user = null,
     Object? iin = null,
     Object? organization = null,
   }) {
     return _then(_$_ProfileModel(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as String,
       iin: null == iin
           ? _value.iin
           : iin // ignore: cast_nullable_to_non_nullable
@@ -146,19 +122,11 @@ class __$$_ProfileModelCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class _$_ProfileModel with DiagnosticableTreeMixin implements _ProfileModel {
-  const _$_ProfileModel(
-      {required this.id,
-      required this.user,
-      required this.iin,
-      required this.organization});
+  const _$_ProfileModel({required this.iin, required this.organization});
 
   factory _$_ProfileModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileModelFromJson(json);
 
-  @override
-  final String id;
-  @override
-  final String user;
   @override
   final String iin;
   @override
@@ -166,7 +134,7 @@ class _$_ProfileModel with DiagnosticableTreeMixin implements _ProfileModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileModel(id: $id, user: $user, iin: $iin, organization: $organization)';
+    return 'ProfileModel(iin: $iin, organization: $organization)';
   }
 
   @override
@@ -174,8 +142,6 @@ class _$_ProfileModel with DiagnosticableTreeMixin implements _ProfileModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ProfileModel'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('user', user))
       ..add(DiagnosticsProperty('iin', iin))
       ..add(DiagnosticsProperty('organization', organization));
   }
@@ -185,8 +151,6 @@ class _$_ProfileModel with DiagnosticableTreeMixin implements _ProfileModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProfileModel &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.user, user) || other.user == user) &&
             (identical(other.iin, iin) || other.iin == iin) &&
             (identical(other.organization, organization) ||
                 other.organization == organization));
@@ -194,7 +158,7 @@ class _$_ProfileModel with DiagnosticableTreeMixin implements _ProfileModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, iin, organization);
+  int get hashCode => Object.hash(runtimeType, iin, organization);
 
   @JsonKey(ignore: true)
   @override
@@ -212,18 +176,12 @@ class _$_ProfileModel with DiagnosticableTreeMixin implements _ProfileModel {
 
 abstract class _ProfileModel implements ProfileModel {
   const factory _ProfileModel(
-      {required final String id,
-      required final String user,
-      required final String iin,
+      {required final String iin,
       required final OrganizationModel organization}) = _$_ProfileModel;
 
   factory _ProfileModel.fromJson(Map<String, dynamic> json) =
       _$_ProfileModel.fromJson;
 
-  @override
-  String get id;
-  @override
-  String get user;
   @override
   String get iin;
   @override

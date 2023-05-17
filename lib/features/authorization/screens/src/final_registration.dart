@@ -44,6 +44,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
   late TextEditingController _idController;
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
+  late TextEditingController _patronymicController;
   late TextEditingController _birthDayController;
   late TextEditingController _phoneNumberController;
   late TextEditingController _emailController;
@@ -121,6 +122,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
     _idController = TextEditingController();
     _firstNameController = TextEditingController();
     _lastNameController = TextEditingController();
+    _patronymicController = TextEditingController();
     _birthDayController = TextEditingController();
     _phoneNumberController = TextEditingController(text: "+7 (___) ___ __ __");
     _emailController = TextEditingController();
@@ -278,6 +280,22 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                         }
                         return null;
                       },
+                    ),
+                    const SizedBox(height: 16),
+
+                    /// Patronymic
+                    TextFormField(
+                      controller: _patronymicController,
+                      decoration: const InputDecoration(
+                          labelText: "Отчество"
+                      ),
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if(value == null || value == "") {
+                          return "Введите отчество";
+                        }
+                        return null;
+                      },
                       onFieldSubmitted: (v) async {
                         await showDatePicker(
                             context: context,
@@ -338,7 +356,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                     ),
                     const SizedBox(height: 16),
 
-                    /// Id
+                    /// IIN
                     TextFormField(
                       controller: _idController,
                       focusNode: idFocus,
@@ -347,7 +365,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                       },
                       validator: (value) {
                         if(value == null || value == "") {
-                          return "Введите идентификатор";
+                          return "Введите ИИН";
                         }
                         if(!identifier) {
                           return "Идентификатор занят";
@@ -356,8 +374,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                       },
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
-                        labelText: "Идентификатор",
-                        prefixText: "@",
+                        labelText: "ИИН",
                         prefixStyle: const TextStyle(
                           color: Colors.black
                         ),

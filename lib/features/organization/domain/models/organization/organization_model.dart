@@ -1,4 +1,4 @@
-import 'package:dsplatform/features/profile/domain/models/organization_type/organization_type.dart';
+import 'package:dsplatform/features/organization/domain/models/organization_type/organization_type.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

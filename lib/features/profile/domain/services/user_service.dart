@@ -23,7 +23,6 @@ class UserService {
   );
 
   Future<UserModel?> getUser() async {
-    log(GetIt.I.get<Authenticator>().credentials.accessToken, name: "Access token");
     var response = await _dio.get(
       '/users/${JwtDecoder.decode(GetIt.I.get<Authenticator>().credentials.accessToken)['id']}',
       options: Options(
@@ -32,8 +31,12 @@ class UserService {
         }
       )
     );
-    print(response.statusCode);
-    print(response.data);
+    try {
+      await const FlutterSecureStorage().write(key: AppSecureStorageKeys.objectIdKey, value: response.data["id"].toString());
+      await const FlutterSecureStorage().write(key: AppSecureStorageKeys.userEmailKey, value: response.data["email"].toString());
+    } catch(e, _) {
+      rethrow;
+    }
     if(response.data["firstName"] != null) {
       return UserModel.fromJson(jsonDecode(response.data));
     } else {

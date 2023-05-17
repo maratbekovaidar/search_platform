@@ -255,11 +255,22 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                           ),
                           const SizedBox(height: 16),
 
+                          /// Patronymic
+                          TextField(
+                            readOnly: true,
+                            enabled: false,
+                            controller: TextEditingController(text: state.userModel.patronymic),
+                            decoration: const InputDecoration(
+                              labelText: "Отчество"
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+
                           /// Birth day
                           TextField(
                             readOnly: true,
                             enabled: false,
-                            controller: TextEditingController(text: DateFormat("dd.MM.y").format(DateTime.parse(state.userModel.birthDate))),
+                            controller: TextEditingController(text: DateFormat("dd.MM.y").format(DateTime.tryParse(state.userModel.birthDate) ?? DateTime.now())),
                             decoration: const InputDecoration(
                               labelText: "Дата рождение"
                             ),

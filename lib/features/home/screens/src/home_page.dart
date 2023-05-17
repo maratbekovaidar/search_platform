@@ -2,6 +2,8 @@ import 'package:dsplatform/configurations/configurations.dart';
 import 'package:dsplatform/constants/secure_storage_keys/secure_storage_keys.dart';
 import 'package:dsplatform/features/authorization/screens/src/pin_code_page.dart';
 import 'package:dsplatform/features/profile/profile.dart';
+import 'package:dsplatform/features/work/screens/src/work_page.dart';
+import 'package:dsplatform/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -85,6 +87,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
+    const WorkPage(),
     const ProfilePage()
   ];
 
@@ -121,30 +124,14 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/icons/unselected_cash.svg",
+              Assets.icons.vote,
+              color: Colors.black38,
             ),
             activeIcon: SvgPicture.asset(
-              "assets/icons/selected_cash.svg",
+              Assets.icons.vote,
+              color: Theme.of(context).primaryColor,
             ),
-            label: AppLocalizations.of(context)!.cash,
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              "assets/icons/unselected_shop.svg"
-            ),
-            activeIcon: SvgPicture.asset(
-                "assets/icons/selected_shop.svg"
-            ),
-            label: AppLocalizations.of(context)!.shop,
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              "assets/icons/unselected_message.svg"
-            ),
-            activeIcon: SvgPicture.asset(
-                "assets/icons/selected_message.svg"
-            ),
-            label: AppLocalizations.of(context)!.message,
+            label: "Работы",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(

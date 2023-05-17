@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:dsplatform/constants/constants.dart';
+import 'package:dsplatform/features/authentication/authentication.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_it/get_it.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -44,7 +46,12 @@ class Authenticator {
       if(credentials.tokenEndpoint.toString().startsWith(ApiPath.apiPath)) {
         /// Initialize client from credentials
         _client = oauth2.Client(credentials, identifier: identifier, secret: secret);
-        _client = await _client!.refreshCredentials().whenComplete(() => log("Token refreshed"));
+        try {
+          _client = await _client!.refreshCredentials().whenComplete(() => log("Token refreshed"));
+        } on Exception catch(e, _) {
+          log(e.toString(), name: "Expired credentials");
+          GetIt.I.get<AuthenticationBloc>().add(LoggedOut());
+        }
         return _client!;
       }
     }

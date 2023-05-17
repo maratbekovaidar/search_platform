@@ -22,15 +22,15 @@ class AuthorizationService {
   /// Logout
   Future<bool> logout() async {
     Response response;
-    response = await _dio.get(
-      '/users/logout',
+    response = await _dio.post(
+      '/logout',
       options: Options(
         followRedirects: false,
         validateStatus: (status) {
           return status! < 500;
         },
         headers: {
-          "user-token": await const FlutterSecureStorage().read(key: AppSecureStorageKeys.tokenKey)
+          "Authorization": "Bearer ${await const FlutterSecureStorage().read(key: AppSecureStorageKeys.tokenKey)}"
         }
       )
     );

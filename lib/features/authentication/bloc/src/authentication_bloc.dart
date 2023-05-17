@@ -68,12 +68,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<LoggedOut>((event, emit) async {
       emit(AuthenticationLoadingState());
       await authenticationRepository.logout();
-      await authenticationRepository.deleteToken();
-      await const FlutterSecureStorage().delete(key: AppSecureStorageKeys.pinCodeKey);
-      await const FlutterSecureStorage().delete(key: AppSecureStorageKeys.userEmailKey);
-      await const FlutterSecureStorage().delete(key: AppSecureStorageKeys.objectIdKey);
-      await const FlutterSecureStorage().delete(key: AppSecureStorageKeys.userFullName);
-      await const FlutterSecureStorage().delete(key: AppSecureStorageKeys.remainingInvitesKey);
+      await GetIt.I.get<Authenticator>().logout();
+      await GetIt.I.get<Authenticator>().clearCookies();
       await const FlutterSecureStorage().deleteAll();
       notifyListeners();
       return emit(AuthenticationUnauthenticatedState());

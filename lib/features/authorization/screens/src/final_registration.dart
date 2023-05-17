@@ -4,8 +4,16 @@ import 'dart:io';
 import 'package:dsplatform/components/keyboard/keyboard_overlay.dart';
 import 'package:dsplatform/constants/constants.dart';
 import 'package:dsplatform/features/authentication/authentication.dart';
+import 'package:dsplatform/features/authorization/screens/src/organization_select_page.dart';
+import 'package:dsplatform/features/organization/bloc/organization/organization_bloc.dart';
+import 'package:dsplatform/features/organization/domain/models/organization/organization_model.dart';
+import 'package:dsplatform/features/organization/domain/models/organization_type/organization_type.dart';
+import 'package:dsplatform/features/organization/domain/repositories/organization_repository.dart';
 import 'package:dsplatform/features/profile/bloc/src/identifier/identifier_bloc.dart';
+import 'package:dsplatform/features/profile/domain/models/profile/profile_model.dart';
+import 'package:dsplatform/features/profile/domain/models/thesis_status/thesis_status.dart';
 import 'package:dsplatform/features/profile/domain/models/user/user_model.dart';
+import 'package:dsplatform/features/profile/domain/models/user_type/user_type.dart';
 import 'package:dsplatform/features/profile/domain/repositories/user_repository.dart';
 import 'package:dsplatform/features/profile/domain/services/user_service.dart';
 import 'package:dsplatform/gen/assets.gen.dart';
@@ -31,16 +39,27 @@ class FinalRegistration extends StatefulWidget {
 
 class _FinalRegistrationState extends State<FinalRegistration> {
 
+  /// Form key
   final _fromKey = GlobalKey<FormState>();
+
+  /// Blocs
   final UserBloc _userBloc = UserBloc(userRepository: IUserRepository());
   final IdentifierBloc _identifierBloc = IdentifierBloc(userRepository: IUserRepository());
+  final OrganizationBloc _organizationBloc = OrganizationBloc(
+      organizationRepository: IOrganizationRepository());
+
+  /// Form's focus nodes
   bool identifier = true;
   final idFocus = FocusNode();
   final birthDayFocus = FocusNode();
   final numberFocusNode = FocusNode();
+
+  /// Form's controllers
   String? avatarUrl;
   XFile? image;
   DateTime? birthDayDateTime;
+  OrganizationModel? organizationModel;
+  OrganizationModel hintOrganizationModel = const OrganizationModel(id: -1, bin: "0", nameKk: "Орагнизацияны танданыз", nameRu: "Выберите организацию", nameEn: "Select organization", organizationType: OrganizationType.UNIVERSITY);
   late TextEditingController _idController;
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
@@ -55,7 +74,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
   );
   final ImagePicker _picker = ImagePicker();
 
-  Future selectImageFromGallery() async {
+  Future _selectImageFromGallery() async {
     image = await _picker.pickImage(source: ImageSource.gallery).whenComplete(() => Navigator.pop(context));
     if(image != null) {
       avatarUrl = await UserService().uploadFile(image!);
@@ -63,7 +82,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
     setState(() {});
   }
 
-  Future selectImageFromCamera() async {
+  Future _selectImageFromCamera() async {
     image = await _picker.pickImage(source: ImageSource.camera).whenComplete(() => Navigator.pop(context));
     if(image != null) {
       avatarUrl = await UserService().uploadFile(image!);
@@ -78,13 +97,13 @@ class _FinalRegistrationState extends State<FinalRegistration> {
           CupertinoActionSheetAction(
             child: Text(AppLocalizations.of(context)!.choose_gallery),
             onPressed: () {
-              selectImageFromGallery();
+              _selectImageFromGallery();
             },
           ),
           CupertinoActionSheetAction(
             child: Text(AppLocalizations.of(context)!.take_photo),
             onPressed: () {
-              selectImageFromCamera();
+              _selectImageFromCamera();
             },
           ),
           CupertinoActionSheetAction(
@@ -159,6 +178,9 @@ class _FinalRegistrationState extends State<FinalRegistration> {
         BlocProvider(
           create: (context) => _identifierBloc,
         ),
+        BlocProvider(
+          create: (context) => _organizationBloc..add(OrganizationLoadEvent()),
+        )
       ],
       child: BlocListener<UserBloc, UserState>(
         listener: (context, state) {
@@ -360,52 +382,20 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                     TextFormField(
                       controller: _idController,
                       focusNode: idFocus,
-                      onChanged: (value) {
-                        _identifierBloc.add(UserIsIdentifierFree(identifier: value));
+                      onChanged: (value) {;
                       },
                       validator: (value) {
                         if(value == null || value == "") {
                           return "Введите ИИН";
                         }
-                        if(!identifier) {
-                          return "Идентификатор занят";
-                        }
                         return null;
                       },
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: "ИИН",
-                        prefixStyle: const TextStyle(
+                        prefixStyle: TextStyle(
                           color: Colors.black
                         ),
-                        suffix: BlocBuilder<IdentifierBloc, IdentifierState>(
-                          builder: (context, state) {
-                            if(state is UserIdentifierCheckingState) {
-                              return const SizedBox(
-                                height: 16,
-                                width: 16,
-                                child: CircularProgressIndicator(
-                                  color: Colors.blue,
-                                  strokeWidth: 2,
-                                ),
-                              );
-                            }
-                            if(state is UserIdentifierFreeState) {
-                              identifier = true;
-                              return Container(
-                                  padding: EdgeInsets.zero,
-                                  height: 16,
-                                  width: 16,
-                                  child: SvgPicture.asset(Assets.icons.success)
-                              );
-                            }
-                            if(state is UserIdentifierTakenState) {
-                              identifier = false;
-                              return const Offstage();
-                            }
-                            return const Offstage();
-                          }
-                        )
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -445,6 +435,46 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                     ),
                     const SizedBox(height: 16),
 
+                    /// Organization dropdown
+                    Container(
+                      height: 51,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white
+                      ),
+                      child: BlocBuilder<OrganizationBloc, OrganizationState>(
+                        builder: (context, state) {
+                          if(state is OrganizationLoadedState) {
+                            return Center(
+                              child: DropdownButton<OrganizationModel?>(
+                                value: organizationModel,
+                                hint: Text(AppLocalizations.of(context)!.select_organization),
+                                underline: const Offstage(),
+                                items: state.organizations.map((organization) {
+                                  return DropdownMenuItem(
+                                    value: organization,
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width - 88,
+                                      child: Text(organization.getNameByLocalization(AppLocalizations.of(context)!.language_code))
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    organizationModel = value;
+                                  });
+                                }
+                              ),
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
                     /// Save
                     Row(
                       children: [
@@ -465,19 +495,25 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                                 );
                               }
                               return ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   bool validation = _fromKey.currentState!.validate();
                                   if(validation){
-                                    log(
-                                      "First name: ${_firstNameController.text}\n"
-                                      "Last name: ${_lastNameController.text}\n"
-                                      "Birth day: ${birthDayDateTime!.millisecondsSinceEpoch}\n"
-                                      "Identifier: ${_idController.text}\n"
-                                      "Phone number: +7${maskFormatter.getUnmaskedText()}\n",
-                                      name: "User form values"
-                                    );
                                     _userBloc.add(UserDataUpdateEvent(
-                                      userModel: UserModel.fromJson({})
+                                      userModel: UserModel(
+                                        id: 1,
+                                        email: _emailController.text,
+                                        userType: UserType.STUDENT,
+                                        phoneNumber: maskFormatter.getUnmaskedText(),
+                                        firstName: _firstNameController.text,
+                                        surname: _lastNameController.text,
+                                        patronymic: _patronymicController.text,
+                                        birthDate: _birthDayController.text,
+                                        avatar: null, thesisStatus: ThesisStatus.APPROVED,
+                                        profile: ProfileModel(
+                                          iin: _idController.text,
+                                          organization: organizationModel!
+                                        ),
+                                      )
                                     ));
                                   }
                                 },
@@ -495,9 +531,9 @@ class _FinalRegistrationState extends State<FinalRegistration> {
               ),
               const SizedBox(height: 16),
 
-              // Padding(
-              //   padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-              // )
+              Padding(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              )
             ],
           ),
         ),

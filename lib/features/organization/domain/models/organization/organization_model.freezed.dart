@@ -164,16 +164,16 @@ class __$$_OrganizationModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_OrganizationModel
-    with DiagnosticableTreeMixin
-    implements _OrganizationModel {
+class _$_OrganizationModel extends _OrganizationModel
+    with DiagnosticableTreeMixin {
   const _$_OrganizationModel(
       {required this.id,
       required this.bin,
       required this.nameKk,
       required this.nameRu,
       required this.nameEn,
-      required this.organizationType});
+      required this.organizationType})
+      : super._();
 
   factory _$_OrganizationModel.fromJson(Map<String, dynamic> json) =>
       _$$_OrganizationModelFromJson(json);
@@ -243,7 +243,7 @@ class _$_OrganizationModel
   }
 }
 
-abstract class _OrganizationModel implements OrganizationModel {
+abstract class _OrganizationModel extends OrganizationModel {
   const factory _OrganizationModel(
       {required final int id,
       required final String bin,
@@ -251,6 +251,7 @@ abstract class _OrganizationModel implements OrganizationModel {
       required final String nameRu,
       required final String nameEn,
       required final OrganizationType organizationType}) = _$_OrganizationModel;
+  const _OrganizationModel._() : super._();
 
   factory _OrganizationModel.fromJson(Map<String, dynamic> json) =
       _$_OrganizationModel.fromJson;

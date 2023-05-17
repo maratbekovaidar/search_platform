@@ -46,11 +46,17 @@ class UserService {
 
   Future<bool> updateUser(UserModel userModel) async {
 
-    var response = await GetIt.I.get<Authenticator>().client!.put(
-      Uri.parse('/users/${JwtDecoder.decode(GetIt.I.get<Authenticator>().credentials.accessToken)}'),
-      body: userModel.toJson()
+    var response = await _dio.put(
+      "/users",
+      data: userModel.toJson(),
+      options: Options(
+        headers: {
+          "Authorization": "Bearer ${GetIt.I.get<Authenticator>().credentials.accessToken}"
+        }
+      )
     );
 
+    print(response.statusCode);
     if(response.statusCode == 401) {
       GetIt.I.get<AuthenticationBloc>().add(LoggedOut());
     }

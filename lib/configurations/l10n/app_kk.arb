@@ -1,6 +1,6 @@
 {
     "language": "Kazakh",
-    "language_code": "kz",
+    "language_code": "kk",
     "@language": {
         "description": "Default language"
     },
@@ -34,6 +34,10 @@
     "general": "Жалпы",
     "privacy_policy": "Құпиялылық саясаты",
     "terms_of_use": "Қолдану ережелері",
-    "write_to_support": "Қолдау көрсетуге жазу"
+    "write_to_support": "Қолдау көрсетуге жазу",
+
+    "select_organization": "Мекемені таңдаңыз",
+    "save": "Сақтау",
+    "search": "Іздеу"
 
 }

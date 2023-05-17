@@ -37,7 +37,7 @@ void main() async {
     // await initializeDateFormatting(languageCode);
   } else {
     /// Set system language
-    GetIt.I.get<LanguageLocalProvider>().setLocale(Locale(Platform.localeName.substring(0, 2), Platform.localeName.substring(3, 5)));
+    GetIt.I.get<LanguageLocalProvider>().setLocale(Locale(Platform.localeName.substring(0, 2)));
     // await initializeDateFormatting(Platform.localeName);
 
   }

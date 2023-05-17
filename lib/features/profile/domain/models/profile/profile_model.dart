@@ -7,7 +7,7 @@ part 'profile_model.g.dart';
 
 @freezed
 class ProfileModel with _$ProfileModel {
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+  @JsonSerializable(explicitToJson: true)
   const factory ProfileModel({
     required String iin,
     required OrganizationModel organization

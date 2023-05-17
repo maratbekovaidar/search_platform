@@ -38,7 +38,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserDataUpdateEvent>((event, emit) async {
       emit(UserUpdatingState());
       try {
-        bool result = await userRepository.updateUser(event.userModel);
+        bool result = await userRepository.updateUser(event.userModel.copyWith(
+          id: int.parse((await const FlutterSecureStorage().read(key: AppSecureStorageKeys.objectIdKey))!)
+        ));
         log(result.toString());
         if(result) {
           return emit(UserUpdatedState());

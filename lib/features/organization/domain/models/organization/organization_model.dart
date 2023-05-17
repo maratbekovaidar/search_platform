@@ -17,6 +17,20 @@ class OrganizationModel with _$OrganizationModel {
     required OrganizationType organizationType
   }) = _OrganizationModel;
 
+  const OrganizationModel._();
+
+  String getNameByLocalization(String languageCode) {
+    switch(languageCode) {
+      case "kk":
+        return nameKk;
+      case "en":
+        return nameEn;
+      case "ru":
+        return nameRu;
+      default:
+        return nameRu;
+    }
+  }
 
   factory OrganizationModel.fromJson(Map<String, dynamic> json) =>
       _$OrganizationModelFromJson(json);

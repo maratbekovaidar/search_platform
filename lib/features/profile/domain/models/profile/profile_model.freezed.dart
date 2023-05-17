@@ -120,7 +120,7 @@ class __$$_ProfileModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable(explicitToJson: true)
 class _$_ProfileModel with DiagnosticableTreeMixin implements _ProfileModel {
   const _$_ProfileModel({required this.iin, required this.organization});
 

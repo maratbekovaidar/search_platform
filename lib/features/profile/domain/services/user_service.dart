@@ -38,7 +38,8 @@ class UserService {
       rethrow;
     }
     if(response.data["firstName"] != null) {
-      return UserModel.fromJson(jsonDecode(response.data));
+      log(response.data["firstName"], name: "User name");
+      return UserModel.fromJson(response.data);
     } else {
       return null;
     }

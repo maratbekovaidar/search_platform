@@ -37,6 +37,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           await GetIt.I.get<Authenticator>().createClient();
           String? pinCode = await const FlutterSecureStorage().read(key: AppSecureStorageKeys.pinCodeKey);
           bool isUserFillProfile = await authenticationRepository.isUserFillProfile();
+          log(isUserFillProfile.toString(), name: "isUserFillProfile");
           FlutterNativeSplash.remove();
           notifyListeners();
           return emit(AuthenticationAuthenticatedState(pinCodeSet: pinCode != null, isUserFillProfile: isUserFillProfile));

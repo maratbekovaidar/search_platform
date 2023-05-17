@@ -110,6 +110,7 @@ class _MyAppState extends State<MyApp> {
 
               if(state is AuthenticationAuthenticatedState) {
                 if(state.isUserFillProfile) {
+                  print("Run home");
                   return MaterialApp.router(
                     title: 'Alga App',
                     theme: AppTheme.basic,

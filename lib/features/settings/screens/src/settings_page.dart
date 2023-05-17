@@ -111,17 +111,6 @@ class _SettingsPageState extends State<SettingsPage> {
               GoRouter.of(context).pushNamed(AppRouteConstants.profileInfoRouteName);
             }),
 
-            /// Invite friend
-            SettingsTileWidget(title: AppLocalizations.of(context)!.invite_friend, icon: SvgPicture.asset(Assets.icons.sendMail), onTap: () {
-              GoRouter.of(context).pushNamed(AppRouteConstants.inviteRouteName);
-            }),
-
-            /// Activate promo
-            SettingsTileWidget(title: AppLocalizations.of(context)!.activate_promo, icon: SvgPicture.asset(Assets.icons.gift), onTap: () {
-              GoRouter.of(context).pushNamed(AppRouteConstants.promoCodeRouteName);
-            }),
-            const SizedBox(height: 16),
-
             /// Title
             Row(
               children: [

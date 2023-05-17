@@ -1,4 +1,6 @@
 import 'package:dsplatform/configurations/theme/src/hex_color_extension.dart';
+import 'package:dsplatform/gen/assets.gen.dart';
+import 'package:dsplatform/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -8,7 +10,7 @@ class AppTheme {
     primarySwatch: HexColor.getPrimarySwatch("#00A8FF"),
     scaffoldBackgroundColor: HexColor.fromHex("#F2F2F2"),
 
-    fontFamily: "Inter",
+    fontFamily: FontFamily.robotoSlab,
 
     /// App Bar theming
     appBarTheme: AppBarTheme(
@@ -17,7 +19,8 @@ class AppTheme {
       titleTextStyle: const TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.w600,
-        color: Colors.black
+        color: Colors.black,
+        fontFamily: FontFamily.robotoSlab,
       ),
       centerTitle: true,
       actionsIconTheme: IconThemeData(

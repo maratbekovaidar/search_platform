@@ -25,7 +25,7 @@ class IUserRepository implements UserRepository {
   Future<bool> updateUser(UserModel userModel) => _userService.updateUser(userModel);
 
   @override
-  Future<bool> isIdentifierFree(String identifier) => _userService.isIdentifierFree(identifier);
+  Future<bool> isIdentifierFree(String identifier) => throw UnimplementedError();
 
   @override
   Future<String?> uploadAvatar(XFile avatar) => _userService.uploadFile(avatar);

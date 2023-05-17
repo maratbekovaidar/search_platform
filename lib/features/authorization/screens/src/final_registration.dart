@@ -460,18 +460,7 @@ class _FinalRegistrationState extends State<FinalRegistration> {
                                       name: "User form values"
                                     );
                                     _userBloc.add(UserDataUpdateEvent(
-                                      userModel: UserModel(
-                                        avatar: avatarUrl,
-                                        firstname: _firstNameController.text,
-                                        lastname: _lastNameController.text,
-                                        date_of_birth: birthDayDateTime!.millisecondsSinceEpoch,
-                                        identifier: _idController.text,
-                                        phone_number: "+7${maskFormatter.getUnmaskedText()}",
-                                        email: _emailController.text,
-                                        objectId: '',
-                                        coins: 0,
-                                        remaining_invites: 5,
-                                      )
+                                      userModel: UserModel.fromJson({})
                                     ));
                                   }
                                 },

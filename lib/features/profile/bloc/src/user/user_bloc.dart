@@ -23,7 +23,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         if(userModel != null) {
           await const FlutterSecureStorage().write(
               key: AppSecureStorageKeys.userFullName,
-              value: "${userModel.firstname} ${userModel.lastname.toString().substring(0, 1)}."
+              value: "${userModel.firstName} ${userModel.surname.toString().substring(0, 1)}."
           );
           return emit(UserLoadedState(userModel: userModel));
         } else {

@@ -1,10 +1,8 @@
-import 'dart:developer';
-
-import 'package:dsplatform/configurations/configurations.dart';
-import 'package:dsplatform/constants/api/api_path.dart';
+import 'package:dsplatform/components/notification_widget/notification_widget.dart';
+import 'package:dsplatform/features/authentication/authentication.dart';
 import 'package:dsplatform/features/authorization/provider/authenticator.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:get_it/get_it.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class OAuth2Page extends StatefulWidget {
@@ -15,26 +13,22 @@ class OAuth2Page extends StatefulWidget {
 
 class _OAuth2PageState extends State<OAuth2Page> {
 
-  late WebViewController _webViewController;
-  late Authenticator _authenticator;
 
   @override
   void initState() {
     super.initState();
-    _webViewController = WebViewController()..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000));
-    _authenticator = Authenticator(webViewController: _webViewController);
-    _authenticator.createClient().then((value) {
-      log(value.credentials.accessToken, name: "Access token");
-      log(value.credentials.refreshToken.toString(), name: "Refresh token");
+    GetIt.I.get<Authenticator>().createClient().then((value) {
+      GetIt.I.get<AuthenticationBloc>().add(LoggedIn());
+    }).onError((error, stackTrace) {
       Navigator.pop(context);
+      showNotificationWidget(context, "Invalid login credentials", NotificationWidgetType.error);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WebViewWidget(controller: _webViewController),
+      body: WebViewWidget(controller: GetIt.I.get<Authenticator>().webViewController),
     );
   }
 }

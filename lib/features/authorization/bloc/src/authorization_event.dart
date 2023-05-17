@@ -3,10 +3,7 @@ part of 'authorization_bloc.dart';
 abstract class AuthorizationEvent {}
 
 class AuthorizationLoginButtonPressedEvent extends AuthorizationEvent {
-  final String username;
-  final String password;
-  final bool rememberLogin;
-  AuthorizationLoginButtonPressedEvent({required this.username, required this.password, this.rememberLogin = false});
+  AuthorizationLoginButtonPressedEvent();
 }
 
 class AuthorizationLogoutButtonPressedEvent extends AuthorizationEvent {

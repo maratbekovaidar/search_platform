@@ -237,7 +237,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                           TextField(
                             readOnly: true,
                             enabled: false,
-                            controller: TextEditingController(text: state.userModel.firstname),
+                            controller: TextEditingController(text: state.userModel.firstName),
                             decoration: const InputDecoration(
                               labelText: "Имя"
                             ),
@@ -248,7 +248,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                           TextField(
                             readOnly: true,
                             enabled: false,
-                            controller: TextEditingController(text: state.userModel.lastname),
+                            controller: TextEditingController(text: state.userModel.surname),
                             decoration: const InputDecoration(
                               labelText: "Фамилия"
                             ),
@@ -259,82 +259,9 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                           TextField(
                             readOnly: true,
                             enabled: false,
-                            controller: TextEditingController(text: DateFormat("dd.MM.y").format(DateTime.fromMillisecondsSinceEpoch(state.userModel.date_of_birth))),
+                            controller: TextEditingController(text: DateFormat("dd.MM.y").format(DateTime.parse(state.userModel.birthDate))),
                             decoration: const InputDecoration(
                               labelText: "Дата рождение"
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-
-                          /// Id
-                          editId ? TextFormField(
-                            controller: idController,
-                            onChanged: (value) {
-                              setState(() {});
-                              identifierBloc.add(UserIsIdentifierFree(identifier: idController.text));
-                            },
-                            validator: (value) {
-                              if(value == "" || value == null) {
-                                return "Введите идентификатор";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              labelText: "Идентификатор",
-                              prefixText: "@",
-                              prefixStyle: const TextStyle(
-                                color: Colors.black
-                              ),
-                              suffix: BlocBuilder<IdentifierBloc, IdentifierState>(
-                                builder: (context, state) {
-                                  if(state is UserIdentifierCheckingState) {
-                                    return const SizedBox(
-                                      height: 16,
-                                      width: 16,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.blue,
-                                        strokeWidth: 2,
-                                      ),
-                                    );
-                                  }
-                                  if(state is UserIdentifierFreeState) {
-                                    identifier = true;
-                                    return Container(
-                                        padding: EdgeInsets.zero,
-                                        height: 16,
-                                        width: 16,
-                                        child: SvgPicture.asset(Assets.icons.success)
-                                    );
-                                  }
-                                  if(state is UserIdentifierTakenState) {
-                                    identifier = false;
-                                    return const Offstage();
-                                  }
-                                  return const Offstage();
-                                }
-                              )
-                            ),
-                          ) : TextFormField(
-                            initialValue: state.userModel.identifier,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              labelText: "Идентификатор",
-                              prefixText: "@",
-                              prefixStyle: const TextStyle(
-                                color: Colors.black
-                              ),
-                              suffixIcon: editId ? null : InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    idController.text = state.userModel.identifier;
-                                    editId = true;
-                                  });
-                                },
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.blue,
-                                ),
-                              )
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -343,7 +270,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                           TextField(
                             readOnly: true,
                             enabled: false,
-                            controller: TextEditingController(text: state.userModel.phone_number),
+                            controller: TextEditingController(text: state.userModel.phoneNumber),
                             decoration: const InputDecoration(
                               labelText: "Номер телефона"
                             ),
@@ -361,56 +288,6 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                           ),
                           const SizedBox(height: 16),
 
-                          editId ? Row(
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                    onPressed: idController.text == state.userModel.identifier ? () {
-                                      setState(() {
-                                        editId = false;
-                                      });
-                                    } :() {
-                                      showCupertinoDialog(
-                                          context: context,
-                                          builder: (context) => CupertinoAlertDialog(
-                                            title: const Text(
-                                              "Подтвердить изменение идентификатора?",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.black,
-                                                  fontSize: 17
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            actions: [
-                                              CupertinoActionSheetAction(onPressed: () {
-                                                Navigator.pop(context);
-                                                setState(() {
-                                                  editId = false;
-                                                });
-                                                userBloc.add(UserLoadEvent());
-                                              }, child: const Text("Отмена", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w400, fontSize: 17),)),
-                                              CupertinoActionSheetAction(onPressed: () {
-                                                Navigator.pop(context);
-                                                userBloc.add(UserDataUpdateEvent(
-                                                  userModel: state.userModel.copyWith(
-                                                    identifier: idController.text
-                                                  )
-                                                ));
-                                                setState(() {
-                                                  editId = false;
-                                                });
-                                              }, child: const Text("Да", style: TextStyle(color: Colors.red, fontWeight: FontWeight.w400, fontSize: 17),)),
-
-                                            ],
-                                          )
-                                      );
-                                    },
-                                    child: Text(idController.text == state.userModel.identifier ? "Отменить" : "Сохранить")
-                                ),
-                              ),
-                            ],
-                          ) : Container(),
                         ],
                       ),
                     ),

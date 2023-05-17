@@ -1,9 +1,6 @@
 import 'package:dsplatform/configurations/configurations.dart';
-import 'package:dsplatform/features/profile/bloc/src/friend/friend_bloc.dart';
 import 'package:dsplatform/features/profile/bloc/src/user/user_bloc.dart';
-import 'package:dsplatform/features/profile/domain/repositories/friend_repository.dart';
 import 'package:dsplatform/features/profile/domain/repositories/user_repository.dart';
-import 'package:dsplatform/features/profile/screens/src/friend_page.dart';
 import 'package:dsplatform/gen/assets.gen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +20,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
 
   UserBloc userBloc = UserBloc(userRepository: IUserRepository());
-  FriendBloc friendBloc = FriendBloc(friendRepository: IFriendRepository());
   
   @override
   Widget build(BuildContext context) {
@@ -31,9 +27,6 @@ class _ProfilePageState extends State<ProfilePage> {
       providers: [
         BlocProvider(
           create: (context) => userBloc..add(UserLoadEvent()),
-        ),
-        BlocProvider(
-          create: (context) => friendBloc..add(FriendsLoadEvent()),
         ),
       ],
       child: Scaffold(
@@ -124,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "${state.userModel.firstname} ${state.userModel.lastname.substring(0, 1)}.",
+                                "${state.userModel.firstName} ${state.userModel.surname.substring(0, 1)}.",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -139,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "@${state.userModel.identifier}",
+                                "@${state.userModel.email}",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -214,252 +207,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     );
                   },
-                ),
-                const SizedBox(height: 24),
-
-                /// Statistic
-                Flex(
-                  direction: Axis.horizontal,
-                  children: [
-
-                    /// Steps
-                    Flexible(
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.white
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            /// Logo
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  Assets.icons.activity,
-                                  width: 21.32,
-                                  height: 26.73,
-                                  // ignore: deprecated_member_use
-                                  color: HexColor.fromHex('#FF9500'),
-                                  theme: SvgTheme(
-                                    currentColor: HexColor.fromHex('#FF9500')
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-
-                            /// Amount
-                            const Text(
-                              "0",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-
-                            /// Subtitle
-                            const Text(
-                              "Шагов пройдено",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 10
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-
-                    /// Step verified
-                    Flexible(
-                      child: GestureDetector(
-                        onTap: () {
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.white
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              /// Logo
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    Assets.icons.success,
-                                    width: 26.67,
-                                    height: 26.67,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 12),
-
-                              /// Amount
-                              const Text(
-                                "0",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-
-                              /// Subtitle
-                              const Text(
-                                "Шагов засчитано",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
-                ),
-                const SizedBox(height: 24),
-
-                /// Friends
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.white
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-
-                      /// Title
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-                          const Text(
-                            "Мои друзья",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black
-                            ),
-                          ),
-
-                          /// Add friend icon
-                          IconButton(
-                            icon: SvgPicture.asset(Assets.icons.selectedAddPerson),
-                            onPressed: () {
-                              GoRouter.of(context).pushNamed(AppRouteConstants.addFriendRouteName);
-                            },
-                          ),
-
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-
-                      BlocBuilder<FriendBloc, FriendState>(
-                        builder: (context, state) {
-                          if(state is FriendLoadedState) {
-                            if(state.friends.isEmpty) {
-                              return Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "У вас пока нет друзей",
-                                    style: TextStyle(
-                                        color: HexColor.fromHex("#000000", opacity: 0.5),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14
-                                    ),
-                                  )
-                                ],
-                              );
-                            }
-                            return Column(
-                              children: state.friends.map((friend) {
-                                return Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => FriendPage(userModel: friend)));
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                width: 44,
-                                                height: 44,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(12),
-                                                ),
-                                                child: Image.network(friend.avatar!),
-                                              ),
-                                              const SizedBox(width: 16),
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "${friend.firstname} ${friend.lastname.substring(0, 1)}.",
-                                                    style: const TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w500
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "@${friend.identifier}",
-                                                    style: TextStyle(
-                                                        fontWeight: FontWeight.w400,
-                                                        color: Colors.black.withOpacity(0.5),
-                                                        fontSize: 10
-                                                    ),
-                                                  )
-                                                ],
-                                              )
-                                            ],
-                                          ),
-
-                                          const Text(
-                                            "0 шагов",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    const Divider(),
-                                    const SizedBox(height: 16),
-                                  ],
-                                );
-                              }).toList(),
-                            );
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      ),
-
-                    ],
-                  ),
                 ),
                 const SizedBox(height: 24),
 

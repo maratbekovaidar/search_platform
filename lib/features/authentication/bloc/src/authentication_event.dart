@@ -18,11 +18,6 @@ class AppStarted extends AuthenticationEvent {
 
 class LoggedIn extends AuthenticationEvent {
 
-  final String token;
-
-
-  LoggedIn({required this.token});
-
   @override
   String toString() => 'LoggedIn';
 

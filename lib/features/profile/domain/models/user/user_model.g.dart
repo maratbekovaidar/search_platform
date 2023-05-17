@@ -7,28 +7,43 @@ part of 'user_model.dart';
 // **************************************************************************
 
 _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
-      objectId: json['objectId'] as String,
-      firstname: json['firstname'] as String,
-      lastname: json['lastname'] as String,
-      avatar: json['avatar'] as String?,
-      coins: (json['coins'] as num).toDouble(),
-      identifier: json['identifier'] as String,
-      remaining_invites: json['remaining_invites'] as int,
-      date_of_birth: json['date_of_birth'] as int,
+      id: json['id'] as int,
       email: json['email'] as String,
-      phone_number: json['phone_number'] as String,
+      userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
+      phoneNumber: json['phoneNumber'] as String,
+      firstName: json['firstName'] as String,
+      surname: json['surname'] as String,
+      patronymic: json['patronymic'] as String,
+      birthDate: json['birthDate'] as String,
+      avatar: json['avatar'] as String?,
+      thesisStatus: $enumDecode(_$ThesisStatusEnumMap, json['thesisStatus']),
+      profile: ProfileModel.fromJson(json['profile'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
     <String, dynamic>{
-      'objectId': instance.objectId,
-      'firstname': instance.firstname,
-      'lastname': instance.lastname,
-      'avatar': instance.avatar,
-      'coins': instance.coins,
-      'identifier': instance.identifier,
-      'remaining_invites': instance.remaining_invites,
-      'date_of_birth': instance.date_of_birth,
+      'id': instance.id,
       'email': instance.email,
-      'phone_number': instance.phone_number,
+      'userType': _$UserTypeEnumMap[instance.userType]!,
+      'phoneNumber': instance.phoneNumber,
+      'firstName': instance.firstName,
+      'surname': instance.surname,
+      'patronymic': instance.patronymic,
+      'birthDate': instance.birthDate,
+      'avatar': instance.avatar,
+      'thesisStatus': _$ThesisStatusEnumMap[instance.thesisStatus]!,
+      'profile': instance.profile.toJson(),
     };
+
+const _$UserTypeEnumMap = {
+  UserType.STUDENT: 'STUDENT',
+  UserType.COMMISSION: 'COMMISSION',
+  UserType.UNIVERSITY_ADMIN: 'UNIVERSITY_ADMIN',
+  UserType.GUEST: 'GUEST',
+};
+
+const _$ThesisStatusEnumMap = {
+  ThesisStatus.APPROVED: 'APPROVED',
+  ThesisStatus.WAITING_APPROVED: 'WAITING_APPROVED',
+  ThesisStatus.REJECTED: 'REJECTED',
+};

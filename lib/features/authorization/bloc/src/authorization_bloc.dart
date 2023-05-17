@@ -13,25 +13,6 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
   final AuthorizationRepository authorizationRepository;
 
   AuthorizationBloc({required this.authorizationRepository}) : super(AuthorizationInitialState()) {
-    on<AuthorizationLoginButtonPressedEvent>((event, emit) async {
-      emit(AuthorizationLoadingState());
-      try {
-        String? token = await authorizationRepository.login(event.username, event.password);
-        if (token != null) {
-
-          emit(AuthorizationSuccessState(token: token));
-          GetIt.I.get<AuthenticationBloc>().add(LoggedIn(token: token));
-          return emit(AuthorizationInitialState());
-        } else {
-          // GetIt.I.get<FlavorConfiguration>().changeApiEndpoint();
-          return emit(AuthorizationFailureState(exception: AuthorizationFailureException("Login failed")));
-        }
-      } on Exception catch (e, _) {
-        // GetIt.I.get<FlavorConfiguration>().changeApiEndpoint();
-        return emit(AuthorizationFailureState(exception: e));
-      }
-
-    });
 
     on<AuthorizationLogoutButtonPressedEvent>((event, emit) {
       GetIt.I.get<AuthenticationBloc>().add(LoggedOut());

@@ -1,11 +1,14 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dsplatform/constants/constants.dart';
 import 'package:dsplatform/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:dsplatform/features/authorization/provider/authenticator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_it/get_it.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -29,7 +32,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
       try {
         final bool hasToken = await authenticationRepository.hasToken();
+        log(hasToken.toString(), name: "Has token");
         if (hasToken) {
+          await GetIt.I.get<Authenticator>().createClient();
           FlutterNativeSplash.remove();
           notifyListeners();
           String? pinCode = await const FlutterSecureStorage().read(key: AppSecureStorageKeys.pinCodeKey);
@@ -52,7 +57,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     /// LoggedIn event
     on<LoggedIn>((event, emit) async {
       emit(AuthenticationLoadingState());
-      await authenticationRepository.saveToken(event.token);
       String? pinCode = await const FlutterSecureStorage().read(key: AppSecureStorageKeys.pinCodeKey);
       bool isUserFillProfile = await authenticationRepository.isUserFillProfile();
       notifyListeners();

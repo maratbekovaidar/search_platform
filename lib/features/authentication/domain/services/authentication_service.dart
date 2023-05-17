@@ -1,8 +1,10 @@
 
 import 'package:dsplatform/constants/constants.dart';
+import 'package:dsplatform/features/authorization/provider/authenticator.dart';
 import 'package:dsplatform/features/profile/domain/services/user_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_it/get_it.dart';
 
 /// Authentication service
 class AuthenticationService {
@@ -28,35 +30,15 @@ class AuthenticationService {
 
   /// Checking token exist
   Future<bool> hasToken() async {
-
     try {
-
-      /// Getting token from secure storage
-      String? token = await _flutterSecureStorage.read(key: AppSecureStorageKeys.tokenKey);
-
-      /// TODO@Future: Implement refresh token and access token's expired time
-      /// ...
-
-      /// If doesn't exist token return false
-      if(token == null) {
-        return false;
+      // await GetIt.I.get<Authenticator>().createClient();
+      if(await const FlutterSecureStorage().read(key: AppSecureStorageKeys.tokenKey) != null) {
+        return true;
       }
-      /// If validating string token doesn't match return false
-      if(!_validateTokenUUID(token)) {
-        /// Also remove unmatched token from secure storage
-        deleteToken();
-        return false;
-      }
-
-      return true;
-
-    } on PlatformException catch (e, _) {
-
-      /// TODO: implement [FlutterSecureStorage]'s platform options
-      /// TODO: and exception handler
-      rethrow;
+      return false;
+    } catch(e, _) {
+      return false;
     }
-
   }
 
   /// Save token

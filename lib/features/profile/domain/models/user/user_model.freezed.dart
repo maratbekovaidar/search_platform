@@ -20,16 +20,17 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  String get objectId => throw _privateConstructorUsedError;
-  String get firstname => throw _privateConstructorUsedError;
-  String get lastname => throw _privateConstructorUsedError;
-  String? get avatar => throw _privateConstructorUsedError;
-  double get coins => throw _privateConstructorUsedError;
-  String get identifier => throw _privateConstructorUsedError;
-  int get remaining_invites => throw _privateConstructorUsedError;
-  int get date_of_birth => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get phone_number => throw _privateConstructorUsedError;
+  UserType get userType => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  String get surname => throw _privateConstructorUsedError;
+  String get patronymic => throw _privateConstructorUsedError;
+  String get birthDate => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
+  ThesisStatus get thesisStatus => throw _privateConstructorUsedError;
+  ProfileModel get profile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,16 +44,19 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String objectId,
-      String firstname,
-      String lastname,
-      String? avatar,
-      double coins,
-      String identifier,
-      int remaining_invites,
-      int date_of_birth,
+      {int id,
       String email,
-      String phone_number});
+      UserType userType,
+      String phoneNumber,
+      String firstName,
+      String surname,
+      String patronymic,
+      String birthDate,
+      String? avatar,
+      ThesisStatus thesisStatus,
+      ProfileModel profile});
+
+  $ProfileModelCopyWith<$Res> get profile;
 }
 
 /// @nodoc
@@ -68,59 +72,72 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? objectId = null,
-    Object? firstname = null,
-    Object? lastname = null,
-    Object? avatar = freezed,
-    Object? coins = null,
-    Object? identifier = null,
-    Object? remaining_invites = null,
-    Object? date_of_birth = null,
+    Object? id = null,
     Object? email = null,
-    Object? phone_number = null,
+    Object? userType = null,
+    Object? phoneNumber = null,
+    Object? firstName = null,
+    Object? surname = null,
+    Object? patronymic = null,
+    Object? birthDate = null,
+    Object? avatar = freezed,
+    Object? thesisStatus = null,
+    Object? profile = null,
   }) {
     return _then(_value.copyWith(
-      objectId: null == objectId
-          ? _value.objectId
-          : objectId // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstname: null == firstname
-          ? _value.firstname
-          : firstname // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastname: null == lastname
-          ? _value.lastname
-          : lastname // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
-      coins: null == coins
-          ? _value.coins
-          : coins // ignore: cast_nullable_to_non_nullable
-              as double,
-      identifier: null == identifier
-          ? _value.identifier
-          : identifier // ignore: cast_nullable_to_non_nullable
-              as String,
-      remaining_invites: null == remaining_invites
-          ? _value.remaining_invites
-          : remaining_invites // ignore: cast_nullable_to_non_nullable
-              as int,
-      date_of_birth: null == date_of_birth
-          ? _value.date_of_birth
-          : date_of_birth // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      phone_number: null == phone_number
-          ? _value.phone_number
-          : phone_number // ignore: cast_nullable_to_non_nullable
+      userType: null == userType
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserType,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      surname: null == surname
+          ? _value.surname
+          : surname // ignore: cast_nullable_to_non_nullable
+              as String,
+      patronymic: null == patronymic
+          ? _value.patronymic
+          : patronymic // ignore: cast_nullable_to_non_nullable
+              as String,
+      birthDate: null == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      thesisStatus: null == thesisStatus
+          ? _value.thesisStatus
+          : thesisStatus // ignore: cast_nullable_to_non_nullable
+              as ThesisStatus,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as ProfileModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileModelCopyWith<$Res> get profile {
+    return $ProfileModelCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value) as $Val);
+    });
   }
 }
 
@@ -132,16 +149,20 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String objectId,
-      String firstname,
-      String lastname,
-      String? avatar,
-      double coins,
-      String identifier,
-      int remaining_invites,
-      int date_of_birth,
+      {int id,
       String email,
-      String phone_number});
+      UserType userType,
+      String phoneNumber,
+      String firstName,
+      String surname,
+      String patronymic,
+      String birthDate,
+      String? avatar,
+      ThesisStatus thesisStatus,
+      ProfileModel profile});
+
+  @override
+  $ProfileModelCopyWith<$Res> get profile;
 }
 
 /// @nodoc
@@ -155,58 +176,63 @@ class __$$_UserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? objectId = null,
-    Object? firstname = null,
-    Object? lastname = null,
-    Object? avatar = freezed,
-    Object? coins = null,
-    Object? identifier = null,
-    Object? remaining_invites = null,
-    Object? date_of_birth = null,
+    Object? id = null,
     Object? email = null,
-    Object? phone_number = null,
+    Object? userType = null,
+    Object? phoneNumber = null,
+    Object? firstName = null,
+    Object? surname = null,
+    Object? patronymic = null,
+    Object? birthDate = null,
+    Object? avatar = freezed,
+    Object? thesisStatus = null,
+    Object? profile = null,
   }) {
     return _then(_$_UserModel(
-      objectId: null == objectId
-          ? _value.objectId
-          : objectId // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstname: null == firstname
-          ? _value.firstname
-          : firstname // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastname: null == lastname
-          ? _value.lastname
-          : lastname // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
-      coins: null == coins
-          ? _value.coins
-          : coins // ignore: cast_nullable_to_non_nullable
-              as double,
-      identifier: null == identifier
-          ? _value.identifier
-          : identifier // ignore: cast_nullable_to_non_nullable
-              as String,
-      remaining_invites: null == remaining_invites
-          ? _value.remaining_invites
-          : remaining_invites // ignore: cast_nullable_to_non_nullable
-              as int,
-      date_of_birth: null == date_of_birth
-          ? _value.date_of_birth
-          : date_of_birth // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      phone_number: null == phone_number
-          ? _value.phone_number
-          : phone_number // ignore: cast_nullable_to_non_nullable
+      userType: null == userType
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserType,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      surname: null == surname
+          ? _value.surname
+          : surname // ignore: cast_nullable_to_non_nullable
+              as String,
+      patronymic: null == patronymic
+          ? _value.patronymic
+          : patronymic // ignore: cast_nullable_to_non_nullable
+              as String,
+      birthDate: null == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      thesisStatus: null == thesisStatus
+          ? _value.thesisStatus
+          : thesisStatus // ignore: cast_nullable_to_non_nullable
+              as ThesisStatus,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as ProfileModel,
     ));
   }
 }
@@ -216,45 +242,48 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   const _$_UserModel(
-      {required this.objectId,
-      required this.firstname,
-      required this.lastname,
-      required this.avatar,
-      required this.coins,
-      required this.identifier,
-      required this.remaining_invites,
-      required this.date_of_birth,
+      {required this.id,
       required this.email,
-      required this.phone_number})
+      required this.userType,
+      required this.phoneNumber,
+      required this.firstName,
+      required this.surname,
+      required this.patronymic,
+      required this.birthDate,
+      required this.avatar,
+      required this.thesisStatus,
+      required this.profile})
       : super._();
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
   @override
-  final String objectId;
-  @override
-  final String firstname;
-  @override
-  final String lastname;
-  @override
-  final String? avatar;
-  @override
-  final double coins;
-  @override
-  final String identifier;
-  @override
-  final int remaining_invites;
-  @override
-  final int date_of_birth;
+  final int id;
   @override
   final String email;
   @override
-  final String phone_number;
+  final UserType userType;
+  @override
+  final String phoneNumber;
+  @override
+  final String firstName;
+  @override
+  final String surname;
+  @override
+  final String patronymic;
+  @override
+  final String birthDate;
+  @override
+  final String? avatar;
+  @override
+  final ThesisStatus thesisStatus;
+  @override
+  final ProfileModel profile;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(objectId: $objectId, firstname: $firstname, lastname: $lastname, avatar: $avatar, coins: $coins, identifier: $identifier, remaining_invites: $remaining_invites, date_of_birth: $date_of_birth, email: $email, phone_number: $phone_number)';
+    return 'UserModel(id: $id, email: $email, userType: $userType, phoneNumber: $phoneNumber, firstName: $firstName, surname: $surname, patronymic: $patronymic, birthDate: $birthDate, avatar: $avatar, thesisStatus: $thesisStatus, profile: $profile)';
   }
 
   @override
@@ -262,16 +291,17 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserModel'))
-      ..add(DiagnosticsProperty('objectId', objectId))
-      ..add(DiagnosticsProperty('firstname', firstname))
-      ..add(DiagnosticsProperty('lastname', lastname))
-      ..add(DiagnosticsProperty('avatar', avatar))
-      ..add(DiagnosticsProperty('coins', coins))
-      ..add(DiagnosticsProperty('identifier', identifier))
-      ..add(DiagnosticsProperty('remaining_invites', remaining_invites))
-      ..add(DiagnosticsProperty('date_of_birth', date_of_birth))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('phone_number', phone_number));
+      ..add(DiagnosticsProperty('userType', userType))
+      ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('surname', surname))
+      ..add(DiagnosticsProperty('patronymic', patronymic))
+      ..add(DiagnosticsProperty('birthDate', birthDate))
+      ..add(DiagnosticsProperty('avatar', avatar))
+      ..add(DiagnosticsProperty('thesisStatus', thesisStatus))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override
@@ -279,39 +309,29 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            (identical(other.objectId, objectId) ||
-                other.objectId == objectId) &&
-            (identical(other.firstname, firstname) ||
-                other.firstname == firstname) &&
-            (identical(other.lastname, lastname) ||
-                other.lastname == lastname) &&
-            (identical(other.avatar, avatar) || other.avatar == avatar) &&
-            (identical(other.coins, coins) || other.coins == coins) &&
-            (identical(other.identifier, identifier) ||
-                other.identifier == identifier) &&
-            (identical(other.remaining_invites, remaining_invites) ||
-                other.remaining_invites == remaining_invites) &&
-            (identical(other.date_of_birth, date_of_birth) ||
-                other.date_of_birth == date_of_birth) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.phone_number, phone_number) ||
-                other.phone_number == phone_number));
+            (identical(other.userType, userType) ||
+                other.userType == userType) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.surname, surname) || other.surname == surname) &&
+            (identical(other.patronymic, patronymic) ||
+                other.patronymic == patronymic) &&
+            (identical(other.birthDate, birthDate) ||
+                other.birthDate == birthDate) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.thesisStatus, thesisStatus) ||
+                other.thesisStatus == thesisStatus) &&
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      objectId,
-      firstname,
-      lastname,
-      avatar,
-      coins,
-      identifier,
-      remaining_invites,
-      date_of_birth,
-      email,
-      phone_number);
+  int get hashCode => Object.hash(runtimeType, id, email, userType, phoneNumber,
+      firstName, surname, patronymic, birthDate, avatar, thesisStatus, profile);
 
   @JsonKey(ignore: true)
   @override
@@ -329,41 +349,44 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
 
 abstract class _UserModel extends UserModel {
   const factory _UserModel(
-      {required final String objectId,
-      required final String firstname,
-      required final String lastname,
-      required final String? avatar,
-      required final double coins,
-      required final String identifier,
-      required final int remaining_invites,
-      required final int date_of_birth,
+      {required final int id,
       required final String email,
-      required final String phone_number}) = _$_UserModel;
+      required final UserType userType,
+      required final String phoneNumber,
+      required final String firstName,
+      required final String surname,
+      required final String patronymic,
+      required final String birthDate,
+      required final String? avatar,
+      required final ThesisStatus thesisStatus,
+      required final ProfileModel profile}) = _$_UserModel;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
 
   @override
-  String get objectId;
-  @override
-  String get firstname;
-  @override
-  String get lastname;
-  @override
-  String? get avatar;
-  @override
-  double get coins;
-  @override
-  String get identifier;
-  @override
-  int get remaining_invites;
-  @override
-  int get date_of_birth;
+  int get id;
   @override
   String get email;
   @override
-  String get phone_number;
+  UserType get userType;
+  @override
+  String get phoneNumber;
+  @override
+  String get firstName;
+  @override
+  String get surname;
+  @override
+  String get patronymic;
+  @override
+  String get birthDate;
+  @override
+  String? get avatar;
+  @override
+  ThesisStatus get thesisStatus;
+  @override
+  ProfileModel get profile;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

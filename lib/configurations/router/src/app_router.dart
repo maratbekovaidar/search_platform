@@ -82,30 +82,6 @@ class AppRouter {
               return const MaterialPage(child: ProfileInfoPage());
             },
           ),
-          /// Add friend page
-          GoRoute(
-            name: AppRouteConstants.addFriendRouteName,
-            path: '/add_friend',
-            pageBuilder: (context, state) {
-              return const MaterialPage(child: AddFriendPage());
-            },
-          ),
-          /// Invite page
-          GoRoute(
-            name: AppRouteConstants.inviteRouteName,
-            path: '/invite',
-            pageBuilder: (context, state) {
-              return const MaterialPage(child: InvitePage());
-            },
-          ),
-          /// Promo code
-          GoRoute(
-            name: AppRouteConstants.promoCodeRouteName,
-            path: '/promo_code',
-            pageBuilder: (context, state) {
-              return const MaterialPage(child: PromoCodePage());
-            },
-          ),
 
         ],
         errorPageBuilder: (context, state) {

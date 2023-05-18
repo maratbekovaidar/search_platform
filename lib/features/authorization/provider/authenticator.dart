@@ -69,8 +69,13 @@ class Authenticator {
     /// Getting authorization url with parameters
     var authorizationUrl = grant.getAuthorizationUrl(redirectUrl);
 
+
     /// Load authorization url in webview
-    webViewController.loadRequest(authorizationUrl);
+    try {
+      webViewController.loadRequest(authorizationUrl);
+    } on Exception catch (e) {
+      GetIt.I.get<AuthenticationBloc>().add(LoggedOut());
+    }
 
     /// Listen when load redirect url
     var responseUrl = await _listen(redirectUrl);

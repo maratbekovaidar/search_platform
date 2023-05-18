@@ -1,7 +1,9 @@
 import 'package:dsplatform/configurations/configurations.dart';
 import 'package:dsplatform/constants/secure_storage_keys/secure_storage_keys.dart';
 import 'package:dsplatform/features/authorization/screens/src/pin_code_page.dart';
+import 'package:dsplatform/features/bookmark/screens/bookmark_page.dart';
 import 'package:dsplatform/features/profile/profile.dart';
+import 'package:dsplatform/features/search/screens/search_page.dart';
 import 'package:dsplatform/features/work/screens/src/work_page.dart';
 import 'package:dsplatform/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +90,9 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const WorkPage(),
-    const ProfilePage()
+    const SearchPage(),
+    const BookmarkPage(),
+    const ProfilePage(),
   ];
 
   @override
@@ -124,23 +128,43 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              Assets.icons.vote,
-              color: Colors.black38,
+              Assets.icons.homeOutlined
             ),
             activeIcon: SvgPicture.asset(
-              Assets.icons.vote,
-              color: Theme.of(context).primaryColor,
+              Assets.icons.homeFilled
             ),
-            label: "Работы",
+            label: "Home"
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/icons/unselected_profile.svg"
+              Assets.icons.search
             ),
             activeIcon: SvgPicture.asset(
-                "assets/icons/selected_profile.svg"
+              Assets.icons.search
             ),
-            label: AppLocalizations.of(context)!.profile,
+            label: "Search"
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              Assets.icons.bookmarkOutlined,
+              width: 24,
+              height: 24,
+            ),
+            activeIcon: SvgPicture.asset(
+              Assets.icons.bookmarkFilled,
+              width: 24,
+              height: 24,
+            ),
+            label: "Bookmark"
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              Assets.icons.profileOutlined
+            ),
+            activeIcon: SvgPicture.asset(
+              Assets.icons.profileFilled
+            ),
+            label: "Profile"
           ),
         ],
         currentIndex: _selectedIndex,

@@ -28,6 +28,7 @@ void main() async {
   /// Setup inversion of control
   setupIoc();
 
+
   /// Get language code
   String? languageCode = await const FlutterSecureStorage().read(key: AppSecureStorageKeys.languageKey);
   if (languageCode != null) {

@@ -22,7 +22,18 @@ Future<void> setupIoc() async {
   await initLanguage(getIt);
 
   /// Register singleton
-  getIt.registerSingleton(WebViewController());
+  getIt.registerSingleton(WebViewController()..setNavigationDelegate(
+    NavigationDelegate(
+      onNavigationRequest: (NavigationRequest request) {
+        print('onNavigationRequest');
+        //I first had this line to prevent redirection to anywhere on the internet via hrefs
+        //but this prevented ANYTHING from being displayed
+        // return NavigationDecision.prevent;
+
+        return NavigationDecision.navigate; //changed it to this, and it works now
+      },
+    )
+  ));
 
   /// Register authenticator
   getIt.registerSingleton(Authenticator(webViewController: getIt.get<WebViewController>()));

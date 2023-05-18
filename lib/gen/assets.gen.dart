@@ -31,6 +31,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ask_message.svg
   String get askMessage => 'assets/icons/ask_message.svg';
 
+  /// File path: assets/icons/bookmark_filled.svg
+  String get bookmarkFilled => 'assets/icons/bookmark_filled.svg';
+
+  /// File path: assets/icons/bookmark_outlined.svg
+  String get bookmarkOutlined => 'assets/icons/bookmark_outlined.svg';
+
   /// File path: assets/icons/circular_profile.svg
   String get circularProfile => 'assets/icons/circular_profile.svg';
 
@@ -52,6 +58,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/gift.svg
   String get gift => 'assets/icons/gift.svg';
 
+  /// File path: assets/icons/home_filled.svg
+  String get homeFilled => 'assets/icons/home_filled.svg';
+
+  /// File path: assets/icons/home_outlined.svg
+  String get homeOutlined => 'assets/icons/home_outlined.svg';
+
   /// File path: assets/icons/linear_chart.svg
   String get linearChart => 'assets/icons/linear_chart.svg';
 
@@ -61,8 +73,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/profile.svg
   String get profile => 'assets/icons/profile.svg';
 
+  /// File path: assets/icons/profile_filled.svg
+  String get profileFilled => 'assets/icons/profile_filled.svg';
+
+  /// File path: assets/icons/profile_outlined.svg
+  String get profileOutlined => 'assets/icons/profile_outlined.svg';
+
   /// File path: assets/icons/remove.svg
   String get remove => 'assets/icons/remove.svg';
+
+  /// File path: assets/icons/search.svg
+  String get search => 'assets/icons/search.svg';
 
   /// File path: assets/icons/security.svg
   String get security => 'assets/icons/security.svg';
@@ -110,6 +131,8 @@ class $AssetsIconsGen {
   List<String> get values => [
         activity,
         askMessage,
+        bookmarkFilled,
+        bookmarkOutlined,
         circularProfile,
         community,
         error,
@@ -117,10 +140,15 @@ class $AssetsIconsGen {
         faceId,
         file,
         gift,
+        homeFilled,
+        homeOutlined,
         linearChart,
         passwordRecovery,
         profile,
+        profileFilled,
+        profileOutlined,
         remove,
+        search,
         security,
         selectedAddPerson,
         selectedCash,

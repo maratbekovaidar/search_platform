@@ -53,6 +53,8 @@ class AuthorizationService {
           "agreement": true
         },
       );
+      print(response.statusCode);
+      print(response.data);
       if(response.statusCode == 201) {
         return true;
       } else {

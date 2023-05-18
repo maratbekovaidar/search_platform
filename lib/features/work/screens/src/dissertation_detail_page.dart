@@ -90,6 +90,20 @@ class _DissertationDetailPageState extends State<DissertationDetailPage> {
               ),
               const SizedBox(height: 16),
 
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 48,
+                child: const Text(
+                  "Abstract",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontFamily: "Times New Roman",
+                    height: 1.5
+                  ),
+                ),
+              ),
+
               /// Abstract
               SizedBox(
                 width: MediaQuery.of(context).size.width - 48,

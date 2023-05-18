@@ -1,5 +1,6 @@
 import 'package:dsplatform/components/notification_widget/notification_widget.dart';
 import 'package:dsplatform/features/work/bloc/dissertation/dissertation_bloc.dart';
+import 'package:dsplatform/features/work/widgets/src/dissertation_shimmer_widget.dart';
 import 'package:dsplatform/features/work/widgets/src/dissertation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -70,7 +71,15 @@ class _WorkPageState extends State<WorkPage> {
                   ),
                 );
               }
-              return const CircularProgressIndicator();
+              return const Column(
+                children: [
+                  DissertationShimmerWidget(),
+                  DissertationShimmerWidget(),
+                  DissertationShimmerWidget(),
+                  DissertationShimmerWidget(),
+                  DissertationShimmerWidget(),
+                ],
+              );
             },
           )
         ),

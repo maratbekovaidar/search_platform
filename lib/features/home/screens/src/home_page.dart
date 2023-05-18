@@ -2,11 +2,16 @@ import 'package:dsplatform/configurations/configurations.dart';
 import 'package:dsplatform/constants/secure_storage_keys/secure_storage_keys.dart';
 import 'package:dsplatform/features/authorization/screens/src/pin_code_page.dart';
 import 'package:dsplatform/features/bookmark/screens/bookmark_page.dart';
+import 'package:dsplatform/features/profile/bloc/src/user/user_bloc.dart';
+import 'package:dsplatform/features/profile/domain/repositories/user_repository.dart';
 import 'package:dsplatform/features/profile/profile.dart';
 import 'package:dsplatform/features/search/screens/search_page.dart';
+import 'package:dsplatform/features/work/bloc/dissertation/dissertation_bloc.dart';
+import 'package:dsplatform/features/work/domain/repositories/dissertation_repository.dart';
 import 'package:dsplatform/features/work/screens/src/work_page.dart';
 import 'package:dsplatform/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,7 +23,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage> {
 
   int _selectedIndex = 0;
 
@@ -26,6 +31,8 @@ class _HomePageState extends State<HomePage> {
 
   final pinCodeKey = GlobalKey<PinCodePageState>();
 
+  @override
+  bool get wantKeepAlive => true;
 
   void _closePinCode() {
     Navigator.pop(context);
@@ -88,12 +95,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  final List<Widget> _pages = [
-    const WorkPage(),
-    const SearchPage(),
-    const BookmarkPage(),
-    const ProfilePage(),
-  ];
 
   @override
   void initState() {
@@ -120,61 +121,88 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  final DissertationBloc _dissertationBloc = DissertationBloc(dissertationRepository: IDissertationRepository());
+  final UserBloc userBloc = UserBloc(userRepository: IUserRepository());
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              Assets.icons.homeOutlined
+    super.build(context);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => _dissertationBloc..add(DissertationLoadEvent()),
+    ),
+        BlocProvider(
+          create: (context) => userBloc..add(UserLoadEvent()),
+        ),
+      ],
+      child: Scaffold(
+        body: PageView(
+          onPageChanged: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          controller: _pageController,
+          children: const [
+            WorkPage(),
+            SearchPage(),
+            BookmarkPage(),
+            ProfilePage(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                Assets.icons.homeOutlined
+              ),
+              activeIcon: SvgPicture.asset(
+                Assets.icons.homeFilled
+              ),
+              label: "Home"
             ),
-            activeIcon: SvgPicture.asset(
-              Assets.icons.homeFilled
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                Assets.icons.search
+              ),
+              activeIcon: SvgPicture.asset(
+                Assets.icons.search
+              ),
+              label: "Search"
             ),
-            label: "Home"
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              Assets.icons.search
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                Assets.icons.bookmarkOutlined,
+                width: 24,
+                height: 24,
+              ),
+              activeIcon: SvgPicture.asset(
+                Assets.icons.bookmarkFilled,
+                width: 24,
+                height: 24,
+              ),
+              label: "Bookmark"
             ),
-            activeIcon: SvgPicture.asset(
-              Assets.icons.search
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                Assets.icons.profileOutlined
+              ),
+              activeIcon: SvgPicture.asset(
+                Assets.icons.profileFilled
+              ),
+              label: "Profile"
             ),
-            label: "Search"
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              Assets.icons.bookmarkOutlined,
-              width: 24,
-              height: 24,
-            ),
-            activeIcon: SvgPicture.asset(
-              Assets.icons.bookmarkFilled,
-              width: 24,
-              height: 24,
-            ),
-            label: "Bookmark"
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              Assets.icons.profileOutlined
-            ),
-            activeIcon: SvgPicture.asset(
-              Assets.icons.profileFilled
-            ),
-            label: "Profile"
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-            // _pageController.jumpToPage(index);
-          });
-        },
+          ],
+          currentIndex: _selectedIndex,
+          type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+              _pageController.jumpToPage(index);
+            });
+          },
+        ),
       ),
     );
   }

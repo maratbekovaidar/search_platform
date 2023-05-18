@@ -63,7 +63,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     authenticationBloc = GetIt.I.get<AuthenticationBloc>();
     authenticationBloc.add(AppStarted());
-    // authenticationBloc.add(LoggedOut());
   }
 
   @override

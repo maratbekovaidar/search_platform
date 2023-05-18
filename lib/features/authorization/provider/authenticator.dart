@@ -50,7 +50,7 @@ class Authenticator {
           _client = await _client!.refreshCredentials().whenComplete(() => log("Token refreshed"));
         } on Exception catch(e, _) {
           log(e.toString(), name: "Expired credentials");
-          GetIt.I.get<AuthenticationBloc>().add(LoggedOut());
+          rethrow;
         }
         return _client!;
       }

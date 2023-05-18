@@ -29,7 +29,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
     /// App started event
     on<AppStarted>((event, emit) async {
-
       try {
         final bool hasToken = await authenticationRepository.hasToken();
         log(hasToken.toString(), name: "Has token");
@@ -46,12 +45,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           notifyListeners();
           return emit(AuthenticationUnauthenticatedState());
         }
-      } on Error catch (error, _) {
-
-        /// If null error
+      } on Exception catch (error, _) {
         return emit(AuthenticationUnauthenticatedState());
       }
-
     });
 
 

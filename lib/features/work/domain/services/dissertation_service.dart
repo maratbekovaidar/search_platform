@@ -20,7 +20,8 @@ class DissertationService {
       Response response = await _dio.get(
         "/dissertation",
         queryParameters: {
-          "query": filter
+          "query": filter,
+          "userOnly": false
         },
         options: Options(
           headers: {

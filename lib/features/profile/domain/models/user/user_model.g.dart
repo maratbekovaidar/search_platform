@@ -13,7 +13,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       phoneNumber: json['phoneNumber'] as String,
       firstName: json['firstName'] as String,
       surname: json['surname'] as String,
-      patronymic: json['patronymic'] as String,
+      patronymic: json['patronymic'] as String?,
       birthDate: json['birthDate'] as String,
       avatar: json['avatar'] as String?,
       thesisStatus: $enumDecode(_$ThesisStatusEnumMap, json['thesisStatus']),

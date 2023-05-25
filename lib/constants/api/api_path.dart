@@ -1,4 +1,4 @@
 
 class ApiPath {
-  static const String apiPath = "https://670f-178-90-95-197.ngrok-free.app";
+  static const String apiPath = "https://ff96-85-159-27-200.ngrok-free.app";
 }

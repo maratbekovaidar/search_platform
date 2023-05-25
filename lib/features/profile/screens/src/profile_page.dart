@@ -199,7 +199,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 },
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 74),
+
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "У вас нету опубликованных работ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600
+                    ),
+                  )
+                ],
+              )
 
             ],
           ),

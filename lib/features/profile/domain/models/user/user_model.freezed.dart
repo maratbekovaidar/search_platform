@@ -26,7 +26,7 @@ mixin _$UserModel {
   String get phoneNumber => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
   String get surname => throw _privateConstructorUsedError;
-  String get patronymic => throw _privateConstructorUsedError;
+  String? get patronymic => throw _privateConstructorUsedError;
   String get birthDate => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
   ThesisStatus get thesisStatus => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $UserModelCopyWith<$Res> {
       String phoneNumber,
       String firstName,
       String surname,
-      String patronymic,
+      String? patronymic,
       String birthDate,
       String? avatar,
       ThesisStatus thesisStatus,
@@ -78,7 +78,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? phoneNumber = null,
     Object? firstName = null,
     Object? surname = null,
-    Object? patronymic = null,
+    Object? patronymic = freezed,
     Object? birthDate = null,
     Object? avatar = freezed,
     Object? thesisStatus = null,
@@ -109,10 +109,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.surname
           : surname // ignore: cast_nullable_to_non_nullable
               as String,
-      patronymic: null == patronymic
+      patronymic: freezed == patronymic
           ? _value.patronymic
           : patronymic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
@@ -155,7 +155,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String phoneNumber,
       String firstName,
       String surname,
-      String patronymic,
+      String? patronymic,
       String birthDate,
       String? avatar,
       ThesisStatus thesisStatus,
@@ -182,7 +182,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? phoneNumber = null,
     Object? firstName = null,
     Object? surname = null,
-    Object? patronymic = null,
+    Object? patronymic = freezed,
     Object? birthDate = null,
     Object? avatar = freezed,
     Object? thesisStatus = null,
@@ -213,10 +213,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.surname
           : surname // ignore: cast_nullable_to_non_nullable
               as String,
-      patronymic: null == patronymic
+      patronymic: freezed == patronymic
           ? _value.patronymic
           : patronymic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
@@ -271,7 +271,7 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   @override
   final String surname;
   @override
-  final String patronymic;
+  final String? patronymic;
   @override
   final String birthDate;
   @override
@@ -355,7 +355,7 @@ abstract class _UserModel extends UserModel {
       required final String phoneNumber,
       required final String firstName,
       required final String surname,
-      required final String patronymic,
+      required final String? patronymic,
       required final String birthDate,
       required final String? avatar,
       required final ThesisStatus thesisStatus,
@@ -378,7 +378,7 @@ abstract class _UserModel extends UserModel {
   @override
   String get surname;
   @override
-  String get patronymic;
+  String? get patronymic;
   @override
   String get birthDate;
   @override

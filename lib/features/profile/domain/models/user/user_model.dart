@@ -20,7 +20,7 @@ class UserModel with _$UserModel {
     required String phoneNumber,
     required String firstName,
     required String surname,
-    required String patronymic,
+    required String? patronymic,
     required String birthDate,
     required String? avatar,
     required ThesisStatus thesisStatus,

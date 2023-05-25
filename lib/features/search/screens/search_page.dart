@@ -32,19 +32,49 @@ class _SearchPageState extends State<SearchPage> {
             "Search",
           ),
           bottom: PreferredSize(
-            preferredSize: Size(MediaQuery.of(context).size.width, 70),
+            preferredSize: Size(MediaQuery.of(context).size.width, 150),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-              child: TextField(
-                onChanged: (value) {
-                  _dissertationBloc.add(DissertationLoadEvent(filter: value));
-                },
-                decoration: const InputDecoration(
-                  hintText: "Search dissertation",
-                  suffixIcon: Icon(
-                    Icons.search
+              child: Column(
+                children: [
+                  TextField(
+                    onChanged: (value) {
+                      _dissertationBloc.add(DissertationLoadEvent(filter: value));
+                    },
+                    decoration: const InputDecoration(
+                      hintText: "Search dissertation",
+                      suffixIcon: Icon(
+                        Icons.search
+                      )
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    height: 50,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        GestureDetector(onTap: () {
+                          _dissertationBloc.add(DissertationLoadEvent(filter: "Software Engineering"));
+                        }, child: const Chip(label: Text("All"))),
+                        const SizedBox(width: 8),
+                        GestureDetector(onTap: () {
+                          _dissertationBloc.add(DissertationLoadEvent(filter: "Software Engineering"));
+                        }, child: const Chip(label: Text("Software Engineering"))),
+                        const SizedBox(width: 8),
+                        GestureDetector(onTap: () {
+                          _dissertationBloc.add(DissertationLoadEvent(filter: "Network"));
+                        }, child: const Chip(label: Text("Network"))),
+                        const SizedBox(width: 8),
+                        GestureDetector(onTap: () {
+                          _dissertationBloc.add(DissertationLoadEvent(filter: "Data Science"));
+                        }, child: const Chip(label: Text("Data Science"))),
+
+                      ],
+                    ),
                   )
-                ),
+                ],
               ),
             ),
           ),
@@ -66,10 +96,8 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               );
             }
-            return const Column(
-              children: [
-                DissertationShimmerWidget(),
-                DissertationShimmerWidget(),
+            return ListView(
+              children: const [
                 DissertationShimmerWidget(),
                 DissertationShimmerWidget(),
                 DissertationShimmerWidget(),

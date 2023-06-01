@@ -1,6 +1,7 @@
 import 'package:dsplatform/configurations/di/bootstrapper/src/bloc_bootstrapper.dart';
 import 'package:dsplatform/configurations/di/bootstrapper/src/repository_bootstrapper.dart';
 import 'package:dsplatform/configurations/language_provider/language_bootstrapper.dart';
+import 'package:dsplatform/features/authentication/bloc/src/authentication_bloc.dart';
 import 'package:dsplatform/features/authorization/provider/authenticator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -20,6 +21,8 @@ Future<void> setupIoc() async {
   await initBloc(getIt);
   /// Call  init languages
   await initLanguage(getIt);
+
+  // GetIt.I.get<AuthenticationBloc>().add(LoggedOut());
 
   /// Register singleton
   getIt.registerSingleton(WebViewController()..setNavigationDelegate(

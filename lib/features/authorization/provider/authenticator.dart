@@ -118,6 +118,8 @@ class Authenticator {
   Future<void> clearCookies() async {
     await webViewController.clearCache();
     await webViewController.clearLocalStorage();
+    final cookieManager = WebViewCookieManager();
+    await cookieManager.clearCookies();
   }
 
   /// Close client and logout

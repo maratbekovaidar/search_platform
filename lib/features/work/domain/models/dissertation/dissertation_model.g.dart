@@ -10,9 +10,9 @@ _$_DissertationModel _$$_DissertationModelFromJson(Map<String, dynamic> json) =>
     _$_DissertationModel(
       id: json['id'] as int,
       createdBy: json['createdBy'] as int,
-      modifiedBy: json['modifiedBy'] as int,
-      createdAt: json['createdAt'] as String,
-      modifiedAt: json['modifiedAt'] as String,
+      modifiedBy: json['modifiedBy'] as int?,
+      createdAt: json['createdAt'] as String?,
+      modifiedAt: json['modifiedAt'] as String?,
       name: json['name'] as String,
       dissertAbstract: json['dissertAbstract'] as String,
       category: json['category'] as String,

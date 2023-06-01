@@ -12,9 +12,9 @@ class DissertationModel with _$DissertationModel {
   const factory DissertationModel({
     required int id,
     required int createdBy,
-    required int modifiedBy,
-    required String createdAt,
-    required String modifiedAt,
+    required int? modifiedBy,
+    required String? createdAt,
+    required String? modifiedAt,
     required String name,
     required String dissertAbstract,
     required String category,

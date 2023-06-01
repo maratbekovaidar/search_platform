@@ -23,6 +23,7 @@ void main() async {
 
   /// Initialize splash screen
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // await const FlutterSecureStorage().deleteAll();
 
 
   /// Setup inversion of control
@@ -42,7 +43,7 @@ void main() async {
     // await initializeDateFormatting(Platform.localeName);
 
   }
-
+  // GetIt.I.get<AuthenticationBloc>().add(LoggedOut());
   runApp(const MyApp());
 }
 

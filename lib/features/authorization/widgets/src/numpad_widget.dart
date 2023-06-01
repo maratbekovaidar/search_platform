@@ -45,6 +45,35 @@ class NumPadWidgetState extends State<NumPadWidget> {
       });
     }
   }
+
+  Future executeLocalAuth() async {
+    try {
+      final bool didAuthenticate = await LocalAuthentication().authenticate(
+          localizedReason: 'Please authenticate to show account balance',
+          options: const AuthenticationOptions(biometricOnly: true),
+          authMessages: <AuthMessages>[
+            const AndroidAuthMessages(
+              signInTitle: 'Oops! Biometric authentication required!',
+              cancelButton: 'No thanks',
+            ),
+            const IOSAuthMessages(
+              cancelButton: 'No thanks',
+            ),
+          ]
+      );
+      widget.localAuthCallback(didAuthenticate);
+    } on PlatformException catch(e, _) {
+      rethrow;
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.localAuth != null ? executeLocalAuth() : () {};
+
+  }
   
   @override
   Widget build(BuildContext context) {

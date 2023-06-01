@@ -22,9 +22,9 @@ DissertationModel _$DissertationModelFromJson(Map<String, dynamic> json) {
 mixin _$DissertationModel {
   int get id => throw _privateConstructorUsedError;
   int get createdBy => throw _privateConstructorUsedError;
-  int get modifiedBy => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get modifiedAt => throw _privateConstructorUsedError;
+  int? get modifiedBy => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  String? get modifiedAt => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get dissertAbstract => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
@@ -47,9 +47,9 @@ abstract class $DissertationModelCopyWith<$Res> {
   $Res call(
       {int id,
       int createdBy,
-      int modifiedBy,
-      String createdAt,
-      String modifiedAt,
+      int? modifiedBy,
+      String? createdAt,
+      String? modifiedAt,
       String name,
       String dissertAbstract,
       String category,
@@ -73,9 +73,9 @@ class _$DissertationModelCopyWithImpl<$Res, $Val extends DissertationModel>
   $Res call({
     Object? id = null,
     Object? createdBy = null,
-    Object? modifiedBy = null,
-    Object? createdAt = null,
-    Object? modifiedAt = null,
+    Object? modifiedBy = freezed,
+    Object? createdAt = freezed,
+    Object? modifiedAt = freezed,
     Object? name = null,
     Object? dissertAbstract = null,
     Object? category = null,
@@ -92,18 +92,18 @@ class _$DissertationModelCopyWithImpl<$Res, $Val extends DissertationModel>
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as int,
-      modifiedBy: null == modifiedBy
+      modifiedBy: freezed == modifiedBy
           ? _value.modifiedBy
           : modifiedBy // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
+              as int?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      modifiedAt: null == modifiedAt
+              as String?,
+      modifiedAt: freezed == modifiedAt
           ? _value.modifiedAt
           : modifiedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -143,9 +143,9 @@ abstract class _$$_DissertationModelCopyWith<$Res>
   $Res call(
       {int id,
       int createdBy,
-      int modifiedBy,
-      String createdAt,
-      String modifiedAt,
+      int? modifiedBy,
+      String? createdAt,
+      String? modifiedAt,
       String name,
       String dissertAbstract,
       String category,
@@ -167,9 +167,9 @@ class __$$_DissertationModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? createdBy = null,
-    Object? modifiedBy = null,
-    Object? createdAt = null,
-    Object? modifiedAt = null,
+    Object? modifiedBy = freezed,
+    Object? createdAt = freezed,
+    Object? modifiedAt = freezed,
     Object? name = null,
     Object? dissertAbstract = null,
     Object? category = null,
@@ -186,18 +186,18 @@ class __$$_DissertationModelCopyWithImpl<$Res>
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as int,
-      modifiedBy: null == modifiedBy
+      modifiedBy: freezed == modifiedBy
           ? _value.modifiedBy
           : modifiedBy // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
+              as int?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      modifiedAt: null == modifiedAt
+              as String?,
+      modifiedAt: freezed == modifiedAt
           ? _value.modifiedAt
           : modifiedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -255,11 +255,11 @@ class _$_DissertationModel
   @override
   final int createdBy;
   @override
-  final int modifiedBy;
+  final int? modifiedBy;
   @override
-  final String createdAt;
+  final String? createdAt;
   @override
-  final String modifiedAt;
+  final String? modifiedAt;
   @override
   final String name;
   @override
@@ -367,9 +367,9 @@ abstract class _DissertationModel implements DissertationModel {
   const factory _DissertationModel(
       {required final int id,
       required final int createdBy,
-      required final int modifiedBy,
-      required final String createdAt,
-      required final String modifiedAt,
+      required final int? modifiedBy,
+      required final String? createdAt,
+      required final String? modifiedAt,
       required final String name,
       required final String dissertAbstract,
       required final String category,
@@ -385,11 +385,11 @@ abstract class _DissertationModel implements DissertationModel {
   @override
   int get createdBy;
   @override
-  int get modifiedBy;
+  int? get modifiedBy;
   @override
-  String get createdAt;
+  String? get createdAt;
   @override
-  String get modifiedAt;
+  String? get modifiedAt;
   @override
   String get name;
   @override
